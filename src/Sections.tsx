@@ -304,7 +304,7 @@ export const WhatThisDoes = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
-          <FadeIn className="order-1 lg:order-2">
+          <FadeIn className="lg:order-2 w-full">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-8">What This Does For Your Business</div>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 leading-tight text-slate-900 break-words text-balance">When the right agent system is running inside your company <span className="text-gradient">you stop trading time for output.</span></h2>
             <div className="space-y-6 text-lg text-gray-600">
@@ -315,7 +315,7 @@ export const WhatThisDoes = () => {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.2} className="order-2 lg:order-1">
+          <FadeIn delay={0.2} className="lg:order-1 w-full">
             <div className="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl p-8 text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiMzMzMiLz48L3N2Zz4=')] opacity-20" />
               {isSystemActive && <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl" />}
@@ -526,7 +526,14 @@ export const DoYouQualify = () => {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <FadeIn delay={0.2} className="order-2 lg:order-1">
+          <FadeIn className="lg:order-2 w-full">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-8">Do You Qualify</div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-8 text-slate-900">This is not for <span className="text-gradient">every business.</span></h2>
+            <p className="text-lg text-gray-600 mb-8">We take on a limited number of engagements at a time because the work we do requires real attention, not a cookie-cutter rollout. To be a fit, you need to check every box.</p>
+            <p className="text-lg text-gray-600">If you're a startup still finding product-market fit, this isn't your next step. Agents amplify what's already working. They don't replace the work of finding your footing.</p>
+          </FadeIn>
+
+          <FadeIn delay={0.2} className="lg:order-1 w-full">
             <div className="bg-white rounded-2xl border border-gray-200 shadow-xl shadow-gray-200/50 p-6 md:p-8">
               <div className="mb-8">
                 <div className="flex justify-between text-sm font-bold text-slate-900 mb-2">
@@ -571,13 +578,6 @@ export const DoYouQualify = () => {
                 )}
               </AnimatePresence>
             </div>
-          </FadeIn>
-
-          <FadeIn className="order-1 lg:order-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-8">Do You Qualify</div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-8 text-slate-900">This is not for <span className="text-gradient">every business.</span></h2>
-            <p className="text-lg text-gray-600 mb-8">We take on a limited number of engagements at a time because the work we do requires real attention, not a cookie-cutter rollout. To be a fit, you need to check every box.</p>
-            <p className="text-lg text-gray-600">If you're a startup still finding product-market fit, this isn't your next step. Agents amplify what's already working. They don't replace the work of finding your footing.</p>
           </FadeIn>
         </div>
       </div>
@@ -692,7 +692,17 @@ export const PictureThis = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <FadeIn delay={0.2}>
+          <FadeIn className="lg:order-2 w-full">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-8">The Vision</div>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight break-words">Picture <span className="text-gradient">This</span></h2>
+            <div className="space-y-6 text-lg text-gray-600">
+              <p>Twelve weeks from now your lead follow-up is running automatically. Your reputation is building without anyone managing it. Your team is working on the things that actually grow the business.</p>
+              <p className="font-bold text-xl text-slate-900 my-8">You open your dashboard on a Tuesday morning and everything is moving the way it should. Without you having to touch it.</p>
+              <p>That's not a fantasy. That's what the right system does when it's built right and installed by people who've done it before.</p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.2} className="lg:order-1 w-full">
             <div className="bg-white rounded-2xl border border-gray-200 shadow-xl shadow-gray-200/50 p-6 md:p-8">
               <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
                 {milestones.map((milestone, i) => (
@@ -711,16 +721,6 @@ export const PictureThis = () => {
                   </div>
                 ))}
               </div>
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-8">The Vision</div>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight break-words">Picture <span className="text-gradient">This</span></h2>
-            <div className="space-y-6 text-lg text-gray-600">
-              <p>Twelve weeks from now your lead follow-up is running automatically. Your reputation is building without anyone managing it. Your team is working on the things that actually grow the business.</p>
-              <p className="font-bold text-xl text-slate-900 my-8">You open your dashboard on a Tuesday morning and everything is moving the way it should. Without you having to touch it.</p>
-              <p>That's not a fantasy. That's what the right system does when it's built right and installed by people who've done it before.</p>
             </div>
           </FadeIn>
         </div>
