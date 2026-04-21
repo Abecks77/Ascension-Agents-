@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Cpu, Workflow, Users, LineChart, MessageSquare, CheckCircle2, ArrowRight, Bot, Zap, Calendar as CalendarIcon, ShieldCheck, XCircle, Hexagon, PenTool, CircleDot, Play, Square } from 'lucide-react';
+import { Search, Cpu, Workflow, Users, LineChart, MessageSquare, CheckCircle2, ArrowRight, Bot, Zap, Calendar as CalendarIcon, ShieldCheck, XCircle, Hexagon, PenTool, CircleDot, Play, Square, ChevronDown } from 'lucide-react';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -203,41 +203,86 @@ export const WhatYouGet = () => {
           <div className="lg:col-span-1 space-y-4">
             {items.map((item, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <button
-                  onClick={() => setActiveItem(i)}
-                  className={`w-full text-left p-4 rounded-xl border transition-all flex items-center gap-4 ${activeItem === i ? 'bg-white border-slate-900 shadow-md scale-[1.02]' : 'bg-white/50 border-gray-100 hover:border-gray-300'}`}
-                >
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${item.bg} ${item.color}`}>
-                    {item.icon}
-                  </div>
-                  <span className="font-bold text-slate-900">{item.title}</span>
-                </button>
+                <div className={`flex flex-col transition-all duration-300 ${activeItem === i ? 'scale-[1.02] z-10' : 'scale-100'}`}>
+                  <button
+                    onClick={() => setActiveItem(activeItem === i ? -1 : i)}
+                    aria-expanded={activeItem === i}
+                    aria-controls={`content-${i}`}
+                    className={`w-full text-left p-4 transition-all flex items-center justify-between border ${
+                      activeItem === i 
+                        ? 'bg-white border-slate-900 shadow-lg rounded-t-xl lg:rounded-xl' 
+                        : 'bg-white/50 border-gray-100 hover:border-gray-300 rounded-xl'
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${item.bg} ${item.color}`}>
+                        {item.icon}
+                      </div>
+                      <span className="font-bold text-slate-900">{item.title}</span>
+                    </div>
+                    <div className="lg:hidden">
+                      <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${activeItem === i ? 'rotate-180' : ''}`} />
+                    </div>
+                  </button>
+                  
+                  {/* Mobile-only accordion content */}
+                  <AnimatePresence>
+                    {activeItem === i && (
+                      <motion.div
+                        id={`content-${i}`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="lg:hidden overflow-hidden"
+                      >
+                        <div className="bg-gradient-brand rounded-b-xl p-6 text-white shadow-lg border-x border-b border-slate-900">
+                          <p className="text-white/90 leading-relaxed font-semibold">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </FadeIn>
             ))}
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="hidden lg:block lg:col-span-2">
             <FadeIn delay={0.2}>
               <div className="bg-gradient-brand rounded-3xl border border-transparent p-6 sm:p-8 md:p-12 h-full flex flex-col justify-center relative overflow-hidden shadow-2xl shadow-orange-500/20">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
                 
-                <motion.div
-                  key={activeItem}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative z-10"
-                >
-                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 md:mb-8 backdrop-blur-sm border border-white/20 text-white">
-                    {items[activeItem].icon}
-                  </div>
-                  <h3 className="text-2xl md:text-4xl font-bold text-white mb-4 md:mb-6">{items[activeItem].title}</h3>
-                  <p className="text-lg md:text-xl text-white/90 leading-relaxed">{items[activeItem].desc}</p>
-                  
-                  <div className="mt-12 pt-8 border-t border-white/20 flex items-center gap-4 text-sm text-white/70 font-mono">
-                    <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-white animate-pulse" /> Included in Engagement</span>
-                  </div>
-                </motion.div>
+                <AnimatePresence mode="wait">
+                  {items[activeItem] ? (
+                    <motion.div
+                      key={activeItem}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="relative z-10"
+                    >
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 md:mb-8 backdrop-blur-sm border border-white/20 text-white">
+                        {items[activeItem].icon}
+                      </div>
+                      <h3 className="text-2xl md:text-4xl font-bold text-white mb-4 md:mb-6">{items[activeItem].title}</h3>
+                      <p className="text-lg md:text-xl text-white/90 leading-relaxed">{items[activeItem].desc}</p>
+                      
+                      <div className="mt-12 pt-8 border-t border-white/20 flex items-center gap-4 text-sm text-white/70 font-mono">
+                        <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-white animate-pulse" /> Included in Engagement</span>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <div className="relative z-10 flex flex-col items-center justify-center text-center text-white/80 h-full">
+                      <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-6 border border-white/20">
+                        <CheckCircle2 className="w-8 h-8" />
+                      </div>
+                      <p className="text-xl font-bold">Select a component above to see details</p>
+                    </div>
+                  )}
+                </AnimatePresence>
               </div>
             </FadeIn>
           </div>
@@ -639,7 +684,7 @@ export const PictureThis = () => {
   ];
 
   return (
-    <section className="py-24 relative overflow-hidden border-t border-gray-100">
+    <section id="timeline" className="py-24 relative overflow-hidden border-t border-gray-100">
       {/* Techy Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50" />
