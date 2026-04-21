@@ -298,9 +298,12 @@ const Navbar = () => {
             </div>
           </div>
           
-          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold text-gray-600">
             <a href="#who-this-is-for" className="hover:text-slate-900 transition-colors">Who This Is For</a>
             <a href="#what-you-get" className="hover:text-slate-900 transition-colors">What You Get</a>
+            <a href="#what-this-does" className="hover:text-slate-900 transition-colors">How It Works</a>
+            <a href="#why-ascension" className="hover:text-slate-900 transition-colors">Why Ascension</a>
+            <a href="#investment" className="hover:text-slate-900 transition-colors">Pricing</a>
             <a href="#contact" className="bg-slate-900 text-white px-5 py-2 rounded-xl hover:bg-slate-800 transition-colors shadow-sm">
               Contact Us
             </a>
@@ -322,6 +325,9 @@ const Navbar = () => {
               <div className="flex flex-col px-6 py-4 gap-4">
                 <a href="#who-this-is-for" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">Who This Is For</a>
                 <a href="#what-you-get" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">What You Get</a>
+                <a href="#what-this-does" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">How It Works</a>
+                <a href="#why-ascension" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">Why Ascension</a>
+                <a href="#investment" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">Pricing</a>
                 <a href="#contact" onClick={() => setIsOpen(false)} className="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-center font-bold">
                   Contact Us
                 </a>

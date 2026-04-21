@@ -251,7 +251,7 @@ export const WhatThisDoes = () => {
   const [isSystemActive, setIsSystemActive] = React.useState(false);
 
   return (
-    <section className="py-24 relative overflow-hidden border-t border-gray-100">
+    <section id="what-this-does" className="py-24 relative overflow-hidden border-t border-gray-100">
       {/* Techy Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-50 rounded-full blur-3xl opacity-50" />
@@ -426,7 +426,7 @@ const AgentMindMap = () => {
 
 export const WhyAscension = () => {
   return (
-    <section className="py-24 relative overflow-hidden border-t border-gray-100">
+    <section id="why-ascension" className="py-24 relative overflow-hidden border-t border-gray-100">
       {/* Techy Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-orange-50 rounded-full blur-3xl opacity-50" />
@@ -550,7 +550,7 @@ export const Investment = () => {
   const savings = opsTotal - systemTotal;
 
   return (
-    <section className="py-24 relative overflow-hidden border-t border-gray-100">
+    <section id="investment" className="py-24 relative overflow-hidden border-t border-gray-100">
       {/* Techy Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -right-20 w-96 h-96 bg-orange-50 rounded-full blur-3xl opacity-50" />
