@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Cpu, Workflow, Users, LineChart, MessageSquare, CheckCircle2, ArrowRight, Bot, Zap, Calendar as CalendarIcon, ShieldCheck, XCircle } from 'lucide-react';
+import { Search, Cpu, Workflow, Users, LineChart, MessageSquare, CheckCircle2, ArrowRight, Bot, Zap, Calendar as CalendarIcon, ShieldCheck, XCircle, Hexagon, PenTool, CircleDot, Play, Square } from 'lucide-react';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -324,15 +324,107 @@ export const WhatThisDoes = () => {
   );
 };
 
-export const WhyAscension = () => {
-  const [activeMetric, setActiveMetric] = React.useState(0);
-  const metrics = [
-    { label: "Response Time", value: "< 2s", desc: "Faster response times.", icon: <Zap className="w-5 h-5 text-yellow-500" /> },
-    { label: "Appointments", value: "+40%", desc: "More booked appointments.", icon: <CalendarIcon className="w-5 h-5 text-blue-500" /> },
-    { label: "Dropped Leads", value: "0%", desc: "Fewer dropped leads.", icon: <ShieldCheck className="w-5 h-5 text-green-500" /> },
-    { label: "Labor Cost", value: "-60%", desc: "Less labor cost on automated tasks.", icon: <LineChart className="w-5 h-5 text-orange-500" /> }
-  ];
+const systemAgents = [
+  { id: 'research', role: 'Data Ingestion', label: 'Research Agent', icon: Search, color: 'text-blue-500', bg: 'bg-blue-50', border: 'border-blue-200', activeBorder: 'border-blue-500', glow: 'shadow-blue-500/20', dot: 'bg-blue-500', log: 'Scanning market trends & extracting competitor ad creative...' },
+  { id: 'content', role: 'Asset Generation', label: 'Content Agent', icon: PenTool, color: 'text-orange-500', bg: 'bg-orange-50', border: 'border-orange-200', activeBorder: 'border-orange-500', glow: 'shadow-orange-500/20', dot: 'bg-orange-500', log: 'Drafting 50+ personalized email sequences and ad variations...' },
+  { id: 'distribution', role: 'Campaign Execution', label: 'Distribution Agent', icon: CircleDot, color: 'text-purple-500', bg: 'bg-purple-50', border: 'border-purple-200', activeBorder: 'border-purple-500', glow: 'shadow-purple-500/20', dot: 'bg-purple-500', log: 'Syncing assets to GHL and scheduling multi-channel posts...' },
+  { id: 'engagement', role: 'Lead Qualification', label: 'Engagement Agent', icon: MessageSquare, color: 'text-emerald-500', bg: 'bg-emerald-50', border: 'border-emerald-200', activeBorder: 'border-emerald-500', glow: 'shadow-emerald-500/20', dot: 'bg-emerald-500', log: 'Responding to inbound DMs and booking calendar appointments...' },
+  { id: 'analytics', role: 'Performance Tracking', label: 'Analytics Agent', icon: LineChart, color: 'text-amber-500', bg: 'bg-amber-50', border: 'border-amber-200', activeBorder: 'border-amber-500', glow: 'shadow-amber-500/20', dot: 'bg-amber-500', log: 'Running A/B tests on open rates and calculating daily ROI...' }
+];
 
+const AgentMindMap = () => {
+  const [activeIdx, setActiveIdx] = React.useState(0);
+  const autoPlayRef = React.useRef(true);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (autoPlayRef.current) {
+        setActiveIdx((prev) => (prev + 1) % systemAgents.length);
+      }
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const AgentBlock = ({ agent, index }: { agent: typeof systemAgents[0], index: number }) => {
+    const isActive = activeIdx === index;
+    const Icon = agent.icon;
+    return (
+      <div
+        onMouseEnter={() => { setActiveIdx(index); autoPlayRef.current = false; }}
+        onMouseLeave={() => autoPlayRef.current = true}
+        className={`relative group cursor-pointer p-3 sm:p-4 rounded-2xl border-2 transition-all duration-300 bg-white flex items-center gap-3 sm:gap-4 w-full ${isActive ? agent.activeBorder + ' shadow-lg scale-[1.02] ' + agent.glow : 'border-slate-100 hover:border-slate-300 shadow-sm'}`}
+      >
+        <div className="absolute top-3 right-3 flex items-center gap-1.5">
+           <div className={`w-1.5 h-1.5 rounded-full ${isActive ? agent.dot + ' animate-pulse' : 'bg-slate-200'}`} />
+           <span className="text-[8px] sm:text-[9px] uppercase font-bold text-slate-400 hidden sm:inline-block">{isActive ? 'Active' : 'Standby'}</span>
+        </div>
+
+        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isActive ? agent.bg : 'bg-slate-50'}`}>
+          <Icon className={`w-5 h-5 sm:w-6 sm:h-6 transition-colors ${isActive ? agent.color : 'text-slate-400'}`} />
+        </div>
+        <div className="pr-4 sm:pr-8">
+          <div className="text-[9px] sm:text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5 sm:mb-1">{agent.role}</div>
+          <div className={`font-semibold text-sm sm:text-base leading-tight transition-colors ${isActive ? 'text-slate-900' : 'text-slate-600'}`}>{agent.label}</div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="w-full bg-slate-50/50 rounded-[32px] border border-slate-200 shadow-2xl p-4 sm:p-8 md:p-12 mx-auto max-w-6xl mt-8 md:mt-16 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-100 rounded-full blur-3xl opacity-40 translate-x-1/3 -translate-y-1/3 pointer-events-none" />
+      <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: 'linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 lg:gap-8 items-center">
+        
+        {/* Left Column: Input Agents */}
+        <div className="flex flex-col gap-4">
+          <AgentBlock agent={systemAgents[0]} index={0} />
+          <AgentBlock agent={systemAgents[1]} index={1} />
+        </div>
+
+        {/* Middle Column: Orchestrator */}
+        <div className="flex flex-col items-center justify-center relative py-6 lg:py-0 w-full lg:w-[320px]">
+          {/* Animated dashed line connector visible mostly on desktop */}
+          <div className="hidden lg:block absolute w-[200%] h-0.5 border-t-2 border-dashed border-slate-300 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10" />
+
+          <div className={`w-full bg-slate-900 rounded-3xl p-6 sm:p-8 flex flex-col items-center shadow-2xl transition-all duration-300 border-2 ${activeIdx !== null ? 'border-orange-500/50 shadow-orange-500/20' : 'border-slate-800'}`}>
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-slate-800 flex items-center justify-center mb-6 relative border border-slate-700">
+              <Cpu className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500 relative z-10" />
+              <div className="absolute inset-0 rounded-full bg-orange-500 animate-ping opacity-[0.15]" />
+            </div>
+            
+            <div className="text-orange-500 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-2">Central Node</div>
+            <div className="text-white font-bold text-xl sm:text-2xl mb-8">Mission Control</div>
+
+            {/* Live Log Console */}
+            <div className="w-full bg-[#0a0f16] rounded-xl p-4 sm:p-5 border border-slate-800 relative overflow-hidden flex flex-col h-[100px] sm:h-[120px] justify-center shadow-inner">
+              <div className="flex items-center gap-2 mb-3">
+                 <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                 <div className="text-slate-500 text-[9px] sm:text-[10px] font-mono tracking-widest uppercase">System Log Activity</div>
+              </div>
+              <div className="font-mono text-xs sm:text-sm text-emerald-400 leading-relaxed">
+                {'>'} {systemAgents[activeIdx].log}
+                <span className="animate-pulse opacity-70">_</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Output Agents */}
+        <div className="flex flex-col gap-4">
+          <AgentBlock agent={systemAgents[2]} index={2} />
+          <AgentBlock agent={systemAgents[3]} index={3} />
+          <AgentBlock agent={systemAgents[4]} index={4} />
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+export const WhyAscension = () => {
   return (
     <section className="py-24 relative overflow-hidden border-t border-gray-100">
       {/* Techy Background Elements */}
@@ -341,8 +433,8 @@ export const WhyAscension = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full overflow-hidden">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
-          <FadeIn>
+        <div className="flex flex-col gap-12 lg:gap-16 items-center w-full">
+          <FadeIn className="flex flex-col items-center text-center max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-[10px] font-bold text-[#ff6b00] uppercase tracking-widest mb-8">Why Ascension Agents</div>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight break-words text-balance">We don't guess. <span className="text-gradient">We've done it.</span></h2>
             <div className="space-y-6 text-lg text-gray-600">
@@ -352,39 +444,8 @@ export const WhyAscension = () => {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.2}>
-            <div className="bg-white rounded-2xl border border-gray-200 shadow-xl shadow-gray-200/50 p-6 sm:p-8">
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8">
-                {metrics.map((metric, i) => (
-                  <div 
-                    key={i}
-                    onClick={() => setActiveMetric(i)}
-                    className={`p-3 sm:p-4 rounded-xl border cursor-pointer transition-all ${activeMetric === i ? 'border-slate-900 shadow-md scale-[1.02] bg-slate-50' : 'border-gray-100 hover:border-gray-300'}`}
-                  >
-                    <div className="flex items-center gap-1 sm:gap-2 mb-2">
-                      {metric.icon}
-                      <span className="text-[10px] sm:text-xs font-bold text-gray-500 uppercase truncate">{metric.label}</span>
-                    </div>
-                    <div className="text-xl sm:text-2xl font-bold text-slate-900">{metric.value}</div>
-                  </div>
-                ))}
-              </div>
-              
-              <motion.div
-                key={activeMetric}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-gradient-brand rounded-xl p-5 sm:p-6 text-white"
-              >
-                <div className="flex items-start gap-4">
-                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-white shrink-0 mt-0.5 sm:mt-1" />
-                  <div>
-                    <h4 className="font-bold text-base sm:text-lg mb-1 sm:mb-2">Proven Result</h4>
-                    <p className="text-sm sm:text-base text-white/90">{metrics[activeMetric].desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
+          <FadeIn delay={0.2} className="w-full">
+            <AgentMindMap />
           </FadeIn>
         </div>
       </div>
