@@ -438,7 +438,7 @@ export const WhyAscension = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-[10px] font-bold text-[#ff6b00] uppercase tracking-widest mb-8">Why Ascension Agents</div>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight break-words text-balance">We don't guess. <span className="text-gradient">We've done it.</span></h2>
             <div className="space-y-6 text-lg text-gray-600">
-              <p>We've built agent systems inside service businesses doing $500K to $5M per year across HVAC, roofing, landscaping, plumbing, and professional services.</p>
+              <p>We've built agent systems inside businesses doing $500K to $5M per year across professional services such as Executive Coaches, Real Estate Investors, E-Commerce Brands, and more.</p>
               <p>We've seen firsthand where the leverage is hiding in these businesses. And we've seen what happens when you pull the right lever at the right time.</p>
               <p>And we can show you exactly what it looks like inside businesses like yours.</p>
             </div>
