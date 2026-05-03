@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Cpu, Workflow, Users, LineChart, MessageSquare, CheckCircle2, ArrowRight, Bot, Zap, Calendar as CalendarIcon, ShieldCheck, XCircle, Hexagon, PenTool, CircleDot, Play, Square, ChevronDown } from 'lucide-react';
+import { Search, Cpu, Workflow, Users, LineChart, MessageSquare, CheckCircle2, ArrowRight, Bot, Zap, Calendar as CalendarIcon, ShieldCheck, XCircle, Hexagon, PenTool, CircleDot, Play, Square, ChevronDown, Settings, RefreshCw, Target, Shield, Sliders, Clock, Box, DollarSign, TrendingUp, Brain, Network, ArrowDown } from 'lucide-react';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -185,8 +185,73 @@ export const WhoThisIsFor = () => {
   );
 };
 
+const workflowNodes = [
+  {
+    id: 'build',
+    title: "WE BUILD",
+    desc: "Custom AI agents designed around your business.",
+    icon: Brain,
+    benefit: "PRECISION",
+    benefitDesc: "Built to be accurate, consistent, and reliable.",
+    benefitIcon: Target,
+    colorHex: "rgba(0, 85, 255, 1)", // brand blue
+    glowColor: "rgba(0, 85, 255, 0.4)",
+    twText: "text-[#0055ff]",
+    twBorder: "border-[#0055ff]",
+  },
+  {
+    id: 'install',
+    title: "WE INSTALL",
+    desc: "Directly into your workflows and existing tools.",
+    icon: Settings,
+    benefit: "SECURE",
+    benefitDesc: "Your data stays protected. Built with security at the core.",
+    benefitIcon: Shield,
+    colorHex: "rgba(255, 107, 0, 1)", // brand orange
+    glowColor: "rgba(255, 107, 0, 0.4)",
+    twText: "text-[#ff6b00]",
+    twBorder: "border-[#ff6b00]",
+  },
+  {
+    id: 'run',
+    title: "THEY RUN",
+    desc: "Handling tasks, decisions, and operations automatically.",
+    icon: RefreshCw,
+    benefit: "FAST",
+    benefitDesc: "Deployed quickly. Runs instantly. Delivers results.",
+    benefitIcon: Zap,
+    colorHex: "rgba(37, 99, 235, 1)", // tailwind blue-600
+    glowColor: "rgba(37, 99, 235, 0.4)",
+    twText: "text-blue-600",
+    twBorder: "border-blue-600",
+  },
+  {
+    id: 'scale',
+    title: "YOU SCALE",
+    desc: "Without adding more people or more manual work.",
+    icon: TrendingUp,
+    benefit: "ADAPTABLE",
+    benefitDesc: "Continuously learns, adapts, and improves as you grow.",
+    benefitIcon: Sliders,
+    colorHex: "rgba(249, 115, 22, 1)", // tailwind orange-500
+    glowColor: "rgba(249, 115, 22, 0.4)",
+    twText: "text-orange-500",
+    twBorder: "border-orange-500",
+  }
+];
+
 export const Positioning = () => {
-  const [isAscension, setIsAscension] = React.useState(true);
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const isHovered = React.useRef(false);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isHovered.current) {
+        setActiveIndex((prev) => (prev + 1) % workflowNodes.length);
+      }
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="py-24 relative overflow-hidden border-t border-gray-100 w-full">
@@ -196,67 +261,135 @@ export const Positioning = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full overflow-hidden">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
-          <FadeIn delay={0.2} className="order-2 lg:order-1">
-            <div className="bg-white rounded-2xl border border-gray-200 shadow-xl shadow-gray-200/50 p-2">
-              <div className="flex p-1 bg-gray-100 rounded-xl mb-4">
-                <button onClick={() => setIsAscension(false)} className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${!isAscension ? 'bg-white shadow-sm text-slate-900' : 'text-gray-500 hover:text-slate-700'}`}>Other Agencies</button>
-                <button onClick={() => setIsAscension(true)} className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${isAscension ? 'bg-white shadow-sm text-slate-900' : 'text-gray-500 hover:text-slate-700'}`}>Ascension Agents</button>
-              </div>
-              <div className="relative h-auto min-h-[380px] md:min-h-[320px] rounded-xl bg-slate-900 overflow-hidden p-6 md:p-6 flex flex-col items-center justify-center">
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiMzMzMiLz48L3N2Zz4=')] opacity-20" />
-                
-                <AnimatePresence mode="wait">
-                  {!isAscension ? (
-                    <motion.div key="other" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative z-10 w-full max-w-sm">
-                      <div className="flex flex-col gap-4">
-                        <div className="bg-slate-800 p-4 rounded-lg border border-slate-700 flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center"><Users className="w-5 h-5 text-gray-400" /></div>
-                          <div><div className="text-sm font-bold text-white">Software Access Granted</div><div className="text-xs text-gray-400">"Here's your login."</div></div>
-                        </div>
-                        <div className="w-0.5 h-8 bg-red-500/50 mx-auto" />
-                        <div className="bg-red-500/10 p-4 rounded-lg border border-red-500/20 flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center"><XCircle className="w-5 h-5 text-red-400" /></div>
-                          <div><div className="text-sm font-bold text-red-400">Implementation Failed</div><div className="text-xs text-red-400/70">Team doesn't know how to use it.</div></div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    <motion.div key="ascension" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative z-10 w-full max-w-sm">
-                      <div className="flex flex-col gap-4">
-                        <div className="bg-slate-800 p-4 rounded-lg border border-slate-700 flex items-center gap-4 relative overflow-hidden">
-                          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-brand" />
-                          <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center"><Search className="w-5 h-5 text-orange-400" /></div>
-                          <div><div className="text-sm font-bold text-white">1. Operational Audit</div><div className="text-xs text-gray-400">We map your workflows.</div></div>
-                        </div>
-                        <div className="w-0.5 h-4 bg-gradient-brand mx-auto" />
-                        <div className="bg-slate-800 p-4 rounded-lg border border-slate-700 flex items-center gap-4 relative overflow-hidden">
-                          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-brand" />
-                          <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center"><Cpu className="w-5 h-5 text-blue-400" /></div>
-                          <div><div className="text-sm font-bold text-white">2. Custom Build</div><div className="text-xs text-gray-400">Agents built for your business.</div></div>
-                        </div>
-                        <div className="w-0.5 h-4 bg-gradient-brand mx-auto" />
-                        <div className="bg-gradient-brand p-4 rounded-lg border border-transparent flex items-center gap-4 shadow-lg shadow-orange-500/20">
-                          <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center"><CheckCircle2 className="w-5 h-5 text-white" /></div>
-                          <div><div className="text-sm font-bold text-white">3. Turnkey Handover</div><div className="text-xs text-white/90">System running & team trained.</div></div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </div>
-          </FadeIn>
-
-          <FadeIn className="order-1 lg:order-2">
+        <div className="flex flex-col items-center gap-12 lg:gap-16 w-full">
+          <FadeIn className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-[10px] font-bold text-[#ff6b00] uppercase tracking-widest mb-8">Positioning</div>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight break-words">Most agencies sell you software <span className="text-gradient">and call it a solution.</span></h2>
-            <div className="space-y-6 text-lg text-gray-600">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight break-words text-balance">Most agencies sell you software <span className="text-gradient">and call it a solution.</span></h2>
+            <div className="space-y-6 text-lg text-gray-600 break-words">
               <p>They hand you a login, point you to a tutorial, and disappear. You're left trying to figure out how to make it work inside a business they've never seen.</p>
               <p className="font-bold text-xl text-slate-900 mt-8">Ascension Agents is different.</p>
               <p>We don't sell tools. We don't sell access. We build done-for-you agent systems, install them inside your existing business, and hand you the keys to something that actually runs.</p>
               <p>No learning curves. No implementation headaches. No wondering if it's working.</p>
               <p className="font-semibold text-slate-900">Just a system built for your business, your workflows, and your team.</p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.2} className="w-full">
+            <div 
+              className="bg-white rounded-[2rem] border border-slate-200 shadow-2xl p-5 lg:p-8 relative overflow-hidden font-sans mx-auto max-w-5xl"
+              onMouseEnter={() => isHovered.current = true}
+              onMouseLeave={() => isHovered.current = false}
+            >
+              
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjMWUzYTg3IiBzdHJva2Utd2lkdGg9IjAuNSIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC4yIj48cGF0aCBkPSJNMCA0MGw0MCAtNDBNMCAwbDQwIDQwIi8+PC9nPjwvc3ZnPg==')] opacity-[0.05] pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white pointer-events-none opacity-80" />
+
+              <div className="relative z-10 w-full">
+                <div className="text-[#ff6b00] font-mono text-[10px] tracking-widest uppercase mb-6 flex items-center justify-center lg:justify-start gap-3">
+                  <span className="w-2 h-2 rounded-full bg-[#ff6b00] animate-pulse" />
+                  The Ascension Agents Solution
+                </div>
+
+                <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-4 sm:gap-6 lg:gap-8 items-center relative">
+                  
+                  {/* Left Column: Build Flow */}
+                  <div className="flex flex-col gap-2.5">
+                    {workflowNodes.map((node, i) => (
+                      <button
+                        key={node.id}
+                        onMouseEnter={() => setActiveIndex(i)}
+                        className={`flex items-start gap-3 p-3 rounded-2xl border transition-all duration-300 w-full text-left bg-white/80 backdrop-blur-sm ${activeIndex === i ? `${node.twBorder} scale-[1.02]` : 'border-slate-200 hover:border-slate-300'}`}
+                        style={{ boxShadow: activeIndex === i ? `0 0 20px ${node.glowColor}` : 'none' }}
+                      >
+                        <div className={`w-8 h-8 shrink-0 rounded-xl flex items-center justify-center transition-colors ${activeIndex === i ? `${node.twText} border ${node.twBorder} bg-slate-50` : 'bg-slate-100 text-slate-500'}`}>
+                          <node.icon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h4 className={`font-bold text-xs mb-0.5 flex items-center gap-2 ${activeIndex === i ? 'text-slate-900' : 'text-slate-600'}`}>
+                            <span className={node.twText}>{i + 1}.</span> {node.title}
+                          </h4>
+                          <p className={`text-[9px] sm:text-[10px] leading-relaxed ${activeIndex === i ? 'text-slate-700' : 'text-slate-500'}`}>
+                            {node.desc}
+                          </p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Middle Column: The System */}
+                  <div className="flex flex-col items-center gap-3 py-6 lg:py-0 w-full max-w-[240px] mx-auto relative z-10">
+                    {/* Input Block */}
+                    <div className="bg-white/90 border border-[#ff6b00]/30 rounded-xl p-3 w-full shrink-0 relative shadow-[0_0_15px_rgba(255,107,0,0.1)] backdrop-blur-md">
+                      <div className="text-center font-bold text-[#ff6b00] text-[9px] uppercase tracking-widest mb-1">Input</div>
+                      <div className="text-center text-xs font-bold text-slate-900 mb-3 tracking-wide">YOUR BUSINESS</div>
+                      <div className="grid grid-cols-3 gap-1">
+                        <div className="flex flex-col items-center gap-1"><Users className="w-3.5 h-3.5 text-slate-400" /><span className="text-[8px] text-slate-500 uppercase font-bold tracking-wider">Customers</span></div>
+                        <div className="flex flex-col items-center gap-1"><Box className="w-3.5 h-3.5 text-slate-400" /><span className="text-[8px] text-slate-500 uppercase font-bold tracking-wider">Products</span></div>
+                        <div className="flex flex-col items-center gap-1"><DollarSign className="w-3.5 h-3.5 text-slate-400" /><span className="text-[8px] text-slate-500 uppercase font-bold tracking-wider">Operations</span></div>
+                      </div>
+                    </div>
+
+                    <ArrowDown className="w-4 h-4 text-[#ff6b00] shrink-0 opacity-50" />
+
+                    {/* Core System */}
+                    <div className="w-full rounded-[1.5rem] border-2 bg-white shadow-[0_0_30px_rgba(255,107,0,0.1)] flex flex-col items-center justify-center relative p-5 transition-all duration-500 backdrop-blur-lg" style={{ borderColor: workflowNodes[activeIndex].colorHex }}>
+                      <div className="relative z-10 flex flex-col items-center">
+                        <div className="text-[#ff6b00] font-bold text-[9px] uppercase tracking-widest mb-1">AI Agents</div>
+                        <div className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-500 mb-5 tracking-wide text-center">SYSTEM</div>
+                        
+                        <div className="relative mb-5">
+                           <div className="absolute inset-0 blur-xl opacity-20 rounded-full transition-colors duration-500" style={{ backgroundColor: workflowNodes[activeIndex].colorHex }} />
+                           <div className="w-16 h-16 rounded-full border bg-slate-50 flex items-center justify-center relative z-10 transition-transform duration-500 transform hover:scale-110" style={{ borderColor: workflowNodes[activeIndex].colorHex }}>
+                             {React.createElement(workflowNodes[activeIndex].icon, { className: "w-6 h-6 drop-shadow-[0_0_4px_currentColor] transition-colors duration-500", style: { color: workflowNodes[activeIndex].colorHex } })}
+                           </div>
+                        </div>
+                        
+                        <div className="flex items-center gap-2 border border-[#84cc16]/30 bg-[#84cc16]/10 px-2.5 py-1 rounded-full">
+                           <div className="w-1 h-1 rounded-full bg-[#84cc16] shadow-[0_0_5px_#84cc16] animate-pulse" />
+                           <span className="text-[#84cc16] text-[8px] sm:text-[9px] font-bold tracking-widest uppercase">Installed & Running</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <ArrowDown className="w-4 h-4 text-[#0055ff] shrink-0 opacity-50" />
+
+                    {/* Output Block */}
+                    <div className="bg-white/90 border border-[#0055ff]/30 rounded-xl p-3 w-full shrink-0 relative shadow-[0_0_15px_rgba(0,85,255,0.1)] backdrop-blur-md">
+                      <div className="text-center font-bold text-[#0055ff] text-[9px] uppercase tracking-widest mb-1">Output</div>
+                      <div className="text-center text-xs font-bold text-slate-900 mb-3 tracking-wide">REAL RESULTS</div>
+                      <div className="grid grid-cols-3 gap-1">
+                        <div className="flex flex-col items-center gap-1 text-center"><CheckCircle2 className="w-3.5 h-3.5 text-slate-400" /><span className="text-[7px] text-slate-500 uppercase font-bold leading-tight tracking-wider">Tasks<br/>Complete</span></div>
+                        <div className="flex flex-col items-center gap-1 text-center"><LineChart className="w-3.5 h-3.5 text-slate-400" /><span className="text-[7px] text-slate-500 uppercase font-bold leading-tight tracking-wider">Growth<br/>Accelerated</span></div>
+                        <div className="flex flex-col items-center gap-1 text-center"><Clock className="w-3.5 h-3.5 text-slate-400" /><span className="text-[7px] text-slate-500 uppercase font-bold leading-tight tracking-wider">Time<br/>Freed Up</span></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Features */}
+                  <div className="flex flex-col gap-2.5">
+                    {workflowNodes.map((node, i) => (
+                      <div
+                        key={`benefit-${node.id}`}
+                        className={`flex items-start gap-3 p-3 rounded-2xl border transition-all duration-300 w-full bg-white/80 backdrop-blur-sm ${activeIndex === i ? `${node.twBorder} scale-[1.02]` : 'border-slate-200 opacity-60'}`}
+                        style={{ boxShadow: activeIndex === i ? `0 0 20px ${node.glowColor}` : 'none' }}
+                      >
+                        <div className={`w-8 h-8 shrink-0 rounded-xl flex items-center justify-center transition-colors ${activeIndex === i ? `${node.twText} border ${node.twBorder} bg-slate-50` : 'bg-slate-100 text-slate-500'}`}>
+                          <node.benefitIcon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h4 className={`font-bold text-xs mb-0.5 ${activeIndex === i ? node.twText : 'text-slate-600'}`}>
+                            {node.benefit}
+                          </h4>
+                          <p className={`text-[9px] sm:text-[10px] leading-relaxed ${activeIndex === i ? 'text-slate-700' : 'text-slate-500'}`}>
+                            {node.benefitDesc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                </div>
+              </div>
             </div>
           </FadeIn>
         </div>
@@ -384,9 +517,125 @@ export const WhatYouGet = () => {
   );
 };
 
-export const WhatThisDoes = () => {
-  const [isSystemActive, setIsSystemActive] = React.useState(false);
+const ImpactCards = () => {
+  const [activeCard, setActiveCard] = React.useState(0);
+  const isHovered = React.useRef(false);
 
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isHovered.current) {
+        setActiveCard((prev) => (prev + 1) % 4);
+      }
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const cards = [
+    {
+      num: 1,
+      title1: "WORK IS BEING",
+      title2: "AUTOMATED",
+      desc: "Not just tasks...\nentire workflows.",
+      status: "ACTIVE",
+      icon: Zap,
+      color: "text-orange-500",
+      borderColor: "border-orange-500",
+      bgFill: "bg-orange-50",
+      gradient: "from-orange-500 to-red-500",
+      shadow: "shadow-orange-500/20"
+    },
+    {
+      num: 2,
+      title1: "DECISIONS ARE",
+      title2: "BEING HANDLED",
+      desc: "Without waiting\non people.",
+      status: "PROCESSING",
+      icon: Brain,
+      color: "text-purple-600",
+      borderColor: "border-purple-600",
+      bgFill: "bg-purple-50",
+      gradient: "from-purple-600 to-indigo-600",
+      shadow: "shadow-purple-500/20"
+    },
+    {
+      num: 3,
+      title1: "SYSTEMS ARE",
+      title2: "REPLACING PROCESS",
+      desc: "Faster. Cleaner.\nMore reliable.",
+      status: "EXECUTING",
+      icon: RefreshCw,
+      color: "text-blue-500",
+      borderColor: "border-blue-500",
+      bgFill: "bg-blue-50",
+      gradient: "from-blue-500 to-cyan-500",
+      shadow: "shadow-blue-500/20"
+    },
+    {
+      num: 4,
+      title1: "COMPANIES ARE",
+      title2: "SCALING DIFFERENTLY",
+      desc: "Without adding\nmore people.",
+      status: "SCALING",
+      icon: TrendingUp,
+      color: "text-pink-600",
+      borderColor: "border-pink-600",
+      bgFill: "bg-pink-50",
+      gradient: "from-pink-600 to-rose-500",
+      shadow: "shadow-pink-500/20"
+    }
+  ];
+
+  return (
+    <div 
+      className="flex flex-col gap-4 w-full relative z-10 max-w-lg mx-auto"
+      onMouseEnter={() => isHovered.current = true}
+      onMouseLeave={() => isHovered.current = false}
+    >
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgc3Ryb2tlPSIjZWFlYmVmIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPjxwYXRoIGQ9Ik0wIDQwbDQwIC00ME0wIDBsNDAgNDAiLz48L2c+PC9zdmc+')] opacity-20 pointer-events-none -z-10" />
+      {cards.map((card, i) => (
+        <div 
+          key={i}
+          className={`flex items-stretch p-4 sm:p-5 rounded-2xl border-2 transition-all duration-500 cursor-pointer bg-white relative overflow-hidden group ${activeCard === i ? `border-slate-200 shadow-xl scale-[1.02] -translate-y-1 ${card.shadow}` : 'border-slate-100 hover:border-slate-200 opacity-60 hover:opacity-100'}`}
+          onClick={() => setActiveCard(i)}
+        >
+          {activeCard === i && (
+            <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl ${card.gradient} opacity-5 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none`} />
+          )}
+          
+          {/* Icon Circle */}
+          <div className="shrink-0 mr-4 sm:mr-6 flex items-center justify-center">
+            <div className={`w-14 h-14 sm:w-[72px] sm:h-[72px] rounded-full flex items-center justify-center border-2 transition-all duration-500 ${activeCard === i ? `border-transparent bg-gradient-to-br ${card.gradient} text-white shadow-lg` : `border-slate-100 bg-white ${card.color} group-hover:bg-slate-50`}`}>
+              <card.icon className="w-6 h-6 sm:w-8 sm:h-8" />
+            </div>
+          </div>
+          
+          <div className="flex-1 text-left flex flex-col justify-center">
+            <h3 className="font-bold text-sm sm:text-[17px] leading-tight tracking-tight text-slate-900 mb-2 uppercase">
+              <span className={card.color}>{card.num}. </span> {card.title1}
+              <br/>
+              <span className={activeCard === i ? card.color : 'text-slate-700 transition-colors'}>{card.title2}</span>
+            </h3>
+            
+            <div className={`h-[3px] w-full bg-gradient-to-r ${card.gradient} mb-3 transition-opacity duration-500 rounded-full`} style={{ opacity: activeCard === i ? 1 : 0.15 }} />
+
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+              <p className="text-slate-600 text-[11px] sm:text-[13px] font-medium whitespace-pre-line leading-snug">
+                {card.desc}
+              </p>
+
+              <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-[9px] sm:text-[10px] font-bold tracking-widest bg-white shrink-0 transition-colors duration-500 ${activeCard === i ? `border-green-200 text-green-600 shadow-sm shadow-green-100` : `border-slate-200 text-slate-400`}`}>
+                 <span className={`w-1.5 h-1.5 rounded-full transition-colors duration-500 ${activeCard === i ? 'bg-green-500 animate-pulse shadow-[0_0_5px_#22c55e]' : 'bg-slate-300'}`} />
+                 {card.status}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export const WhatThisDoes = () => {
   return (
     <section id="what-this-does" className="py-24 relative overflow-hidden border-t border-gray-100">
       {/* Techy Background Elements */}
@@ -407,53 +656,9 @@ export const WhatThisDoes = () => {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.2} className="lg:order-1 w-full">
-            <div className="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl p-8 text-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiMzMzMiLz48L3N2Zz4=')] opacity-20" />
-              {isSystemActive && <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl" />}
-              
-              <div className="flex justify-between items-center mb-8 relative z-10">
-                <div className="flex flex-col items-center gap-1 md:gap-2">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-800 flex items-center justify-center"><Users className="w-5 h-5 md:w-6 md:h-6 text-gray-400"/></div>
-                  <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">Leads In</span>
-                </div>
-                <div className="flex-1 h-1 mx-2 md:mx-4 bg-slate-800 relative overflow-hidden rounded-full">
-                  <motion.div 
-                    className={`absolute top-0 left-0 h-full ${isSystemActive ? 'bg-gradient-brand' : 'bg-red-500'}`}
-                    animate={{ width: isSystemActive ? '100%' : '30%' }}
-                    transition={{ duration: 1 }}
-                  />
-                </div>
-                <div className="flex flex-col items-center gap-1 md:gap-2">
-                  <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-colors duration-500 ${isSystemActive ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-                    {isSystemActive ? <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6"/> : <XCircle className="w-5 h-5 md:w-6 md:h-6"/>}
-                  </div>
-                  <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">{isSystemActive ? 'Closed' : 'Dropped'}</span>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8 relative z-10">
-                <div className="bg-slate-800/80 backdrop-blur-sm rounded-lg p-3 md:p-4 border border-slate-700">
-                  <div className="text-xl md:text-2xl font-bold text-white mb-1">{isSystemActive ? '< 2s' : '4+ hrs'}</div>
-                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Response Time</div>
-                </div>
-                <div className="bg-slate-800/80 backdrop-blur-sm rounded-lg p-3 md:p-4 border border-slate-700">
-                  <div className="text-xl md:text-2xl font-bold text-white mb-1">{isSystemActive ? '100%' : '35%'}</div>
-                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Follow-up Rate</div>
-                </div>
-                <div className="bg-slate-800/80 backdrop-blur-sm rounded-lg p-3 md:p-4 border border-slate-700">
-                  <div className="text-xl md:text-2xl font-bold text-white mb-1">{isSystemActive ? '$0' : '$4k+'}</div>
-                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Lost Revenue</div>
-                </div>
-              </div>
-
-              <button 
-                onClick={() => setIsSystemActive(!isSystemActive)}
-                className={`relative z-10 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 w-full ${isSystemActive ? 'bg-slate-800 text-white hover:bg-slate-700 border border-slate-700' : 'bg-gradient-brand text-white hover:opacity-90 shadow-lg shadow-orange-500/20'}`}
-              >
-                {isSystemActive ? 'Revert to Manual' : 'Deploy Agent System'}
-              </button>
-            </div>
+          <FadeIn delay={0.2} className="lg:order-1 w-full relative">
+            <div className="absolute inset-0 -translate-x-10 -translate-y-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none" />
+            <ImpactCards />
           </FadeIn>
         </div>
       </div>

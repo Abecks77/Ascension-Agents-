@@ -4,7 +4,7 @@ import {
   ChevronDown, ArrowRight, Bot, LineChart, Users, Database, 
   ShieldCheck, Box, Menu, X, Zap, Workflow, Cpu, MessageSquare, PenTool,
   CheckCircle2, PhoneOff, CalendarX, Star, Phone, Bell, Search, Settings,
-  Calendar as CalendarIcon, Mail, Clock, Megaphone
+  Calendar as CalendarIcon, Mail, Clock, Megaphone, ArrowDown
 } from 'lucide-react';
 import { 
   WhoThisIsFor, Positioning, WhatYouGet, WhatThisDoes, 
@@ -478,21 +478,21 @@ const Hero = () => {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-[10px] font-bold text-[#ff6b00] uppercase tracking-widest mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-[#ff6b00] animate-pulse" />
-            Custom AI Agent Engineering
+            Ascend beyond manual operations
           </div>
           <h1 className="text-[28px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] font-bold leading-[1.1] mb-8 tracking-tight pb-2 overflow-wrap-anywhere">
-            <span className="block text-slate-900">Your business doesn't need more people.</span>
-            <span className="block text-gradient">It needs better infrastructure.</span>
+            <span className="block text-slate-900">Build An AI Workforce That Runs</span>
+            <span className="block text-gradient">Your Business Behind The Scenes.</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-500 mb-10 leading-relaxed max-w-2xl mx-auto font-medium">
-            We build high-leverage, low-maintenance agent systems so your company runs smoother, scales faster, and stops bleeding money on tasks machines should already own.
+            We build high-leverage, low-maintenance agent teams so your company runs smoother, scales faster, and stops bleeding money on tasks our digital employees can already do.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="#contact" className="bg-gradient-brand text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-xl shadow-orange-500/20 hover:scale-105">
-              Book a Strategy Call <ArrowRight className="w-5 h-5" />
-            </a>
+            <button className="bg-gradient-brand text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-xl shadow-orange-500/20 hover:scale-105">
+              Explore Agent systems <ArrowDown className="w-5 h-5" />
+            </button>
             <a href="#impact" className="text-gray-500 px-8 py-4 font-bold hover:text-slate-900 transition-colors">
-              See How It Works
+              Book a discovery call
             </a>
           </div>
         </motion.div>
