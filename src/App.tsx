@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   ChevronDown, ArrowRight, Bot, LineChart, Users, Database, 
@@ -10,6 +11,7 @@ import {
   WhoThisIsFor, Positioning, WhatYouGet, WhatThisDoes, 
   WhyAscension, DoYouQualify, Investment, PictureThis, Contact 
 } from './Sections';
+import WebsitesPage from './WebsitesPage';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -277,6 +279,7 @@ const FadeIn = ({ children, delay = 0 }: FadeInProps) => (
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -284,14 +287,25 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isHome = location.pathname === '/';
+
+  const navLinks = [
+    { label: "Who This Is For", href: isHome ? "#who-this-is-for" : "/#who-this-is-for" },
+    { label: "What You Get", href: isHome ? "#what-you-get" : "/#what-you-get" },
+    { label: "How It Works", href: isHome ? "#what-this-does" : "/#what-this-does" },
+    { label: "Why Ascension", href: isHome ? "#why-ascension" : "/#why-ascension" },
+    { label: "Websites", href: "/websites", isNew: true },
+    { label: "Pricing", href: isHome ? "#investment" : "/#investment" },
+  ];
+
   return (
     <nav className="fixed top-6 w-full z-50 px-6">
-      <div className={`max-w-5xl mx-auto transition-all duration-300 rounded-2xl border ${scrolled ? 'bg-white/80 backdrop-blur-md border-gray-200 shadow-lg' : 'bg-white/40 backdrop-blur-sm border-white/20'}`}>
+      <div className={`max-w-7xl mx-auto transition-all duration-300 rounded-2xl border ${scrolled ? 'bg-white/80 backdrop-blur-md border-gray-200 shadow-lg' : 'bg-white/40 backdrop-blur-sm border-white/20'}`}>
         <div className="px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <img src="https://drive.google.com/thumbnail?id=10r344KT6-zbB5oPtuv5ZBHBUqUjxJzD7&sz=w800" alt="Ascension Agents Logo" className="h-8 sm:h-10 md:h-12 w-auto" referrerPolicy="no-referrer" />
-            </div>
+            </Link>
             <div className="hidden lg:flex items-center gap-2 px-2 py-1 rounded-full bg-green-50 border border-green-100">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               <span className="text-[10px] font-bold text-green-700 uppercase tracking-wider">System Live</span>
@@ -299,11 +313,15 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold text-gray-600">
-            <a href="#who-this-is-for" className="hover:text-slate-900 transition-colors">Who This Is For</a>
-            <a href="#what-you-get" className="hover:text-slate-900 transition-colors">What You Get</a>
-            <a href="#what-this-does" className="hover:text-slate-900 transition-colors">How It Works</a>
-            <a href="#why-ascension" className="hover:text-slate-900 transition-colors">Why Ascension</a>
-            <a href="#investment" className="hover:text-slate-900 transition-colors">Pricing</a>
+            {navLinks.map((link) => (
+              link.isNew ? (
+                <Link key={link.label} to={link.href} className={`hover:text-slate-900 transition-colors ${location.pathname === link.href ? 'text-blue-600' : ''}`}>
+                  {link.label}
+                </Link>
+              ) : (
+                <a key={link.label} href={link.href} className="hover:text-slate-900 transition-colors">{link.label}</a>
+              )
+            ))}
             <a href="#contact" className="bg-slate-900 text-white px-5 py-2 rounded-xl hover:bg-slate-800 transition-colors shadow-sm">
               Contact Us
             </a>
@@ -323,11 +341,15 @@ const Navbar = () => {
               className="md:hidden bg-white rounded-b-2xl overflow-hidden border-t border-gray-100"
             >
               <div className="flex flex-col px-6 py-4 gap-4">
-                <a href="#who-this-is-for" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">Who This Is For</a>
-                <a href="#what-you-get" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">What You Get</a>
-                <a href="#what-this-does" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">How It Works</a>
-                <a href="#why-ascension" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">Why Ascension</a>
-                <a href="#investment" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">Pricing</a>
+                {navLinks.map((link) => (
+                  link.isNew ? (
+                    <Link key={link.label} to={link.href} onClick={() => setIsOpen(false)} className={`text-gray-600 hover:text-slate-900 font-semibold ${location.pathname === link.href ? 'text-blue-600' : ''}`}>
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a key={link.label} href={link.href} onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">{link.label}</a>
+                  )
+                ))}
                 <a href="#contact" onClick={() => setIsOpen(false)} className="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-center font-bold">
                   Contact Us
                 </a>
@@ -832,6 +854,7 @@ const Footer = () => {
             <h4 className="font-bold mb-4 text-slate-900">Platform</h4>
             <ul className="space-y-3 text-gray-500">
               <li><a href="#how-it-works" className="hover:text-slate-900 transition-colors">How it Works</a></li>
+              <li><Link to="/websites" className="hover:text-slate-900 transition-colors">Websites</Link></li>
               <li><a href="#features" className="hover:text-slate-900 transition-colors">Capabilities</a></li>
               <li><a href="#faq" className="hover:text-slate-900 transition-colors">FAQ</a></li>
             </ul>
@@ -859,31 +882,51 @@ const Footer = () => {
   );
 };
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
+
+const HomePage = () => (
+  <>
+    <Hero />
+    <WhoThisIsFor />
+    <Positioning />
+    <WhatYouGet />
+    <WhatThisDoes />
+    <WhyAscension />
+    <DoYouQualify />
+    <Investment />
+    <PictureThis />
+    <Contact />
+  </>
+);
+
 export default function App() {
   return (
-    <div className="min-h-screen selection:bg-blue-100 relative w-full overflow-x-hidden">
-      {/* Global Background Decorations */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[120px]" />
-        <div className="absolute top-[20%] right-[-5%] w-[30%] h-[50%] bg-blue-500/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[10%] left-[5%] w-[35%] h-[35%] bg-blue-500/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-5%] right-[10%] w-[40%] h-[30%] bg-blue-500/5 rounded-full blur-[120px]" />
+    <Router>
+      <ScrollToTop />
+      <div className="min-h-screen selection:bg-blue-100 relative w-full overflow-x-hidden">
+        {/* Global Background Decorations */}
+        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[120px]" />
+          <div className="absolute top-[20%] right-[-5%] w-[30%] h-[50%] bg-blue-500/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-[10%] left-[5%] w-[35%] h-[35%] bg-blue-500/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-[-5%] right-[10%] w-[40%] h-[30%] bg-blue-500/5 rounded-full blur-[120px]" />
+        </div>
+        
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/websites" element={<WebsitesPage />} />
+          </Routes>
+        </main>
+        <Footer />
       </div>
-      
-      <Navbar />
-      <main>
-        <Hero />
-        <WhoThisIsFor />
-        <Positioning />
-        <WhatYouGet />
-        <WhatThisDoes />
-        <WhyAscension />
-        <DoYouQualify />
-        <Investment />
-        <PictureThis />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    </Router>
   );
 }
