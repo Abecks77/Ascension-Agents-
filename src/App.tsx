@@ -12,6 +12,8 @@ import {
   WhyAscension, DoYouQualify, Investment, PictureThis, Contact 
 } from './Sections';
 import WebsitesPage from './WebsitesPage';
+import JournalPage from './JournalPage';
+import AppsPage from './AppsPage';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -290,12 +292,10 @@ const Navbar = () => {
   const isHome = location.pathname === '/';
 
   const navLinks = [
-    { label: "Who This Is For", href: isHome ? "#who-this-is-for" : "/#who-this-is-for" },
-    { label: "What You Get", href: isHome ? "#what-you-get" : "/#what-you-get" },
-    { label: "How It Works", href: isHome ? "#what-this-does" : "/#what-this-does" },
-    { label: "Why Ascension", href: isHome ? "#why-ascension" : "/#why-ascension" },
-    { label: "Websites", href: "/websites", isNew: true },
-    { label: "Pricing", href: isHome ? "#investment" : "/#investment" },
+    { label: "Home", href: "/" },
+    { label: "Ascension Sites", href: "/websites" },
+    { label: "Custom Apps", href: "/apps" },
+    { label: "Ascension Journal", href: "/journal" },
   ];
 
   return (
@@ -314,12 +314,14 @@ const Navbar = () => {
           
           <div className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold text-gray-600">
             {navLinks.map((link) => (
-              link.isNew ? (
+              link.href.includes('#') ? (
+                <a key={link.label} href={link.href} className="hover:text-slate-900 transition-colors">
+                  {link.label}
+                </a>
+              ) : (
                 <Link key={link.label} to={link.href} className={`hover:text-slate-900 transition-colors ${location.pathname === link.href ? 'text-blue-600' : ''}`}>
                   {link.label}
                 </Link>
-              ) : (
-                <a key={link.label} href={link.href} className="hover:text-slate-900 transition-colors">{link.label}</a>
               )
             ))}
             <a href="#contact" className="bg-slate-900 text-white px-5 py-2 rounded-xl hover:bg-slate-800 transition-colors shadow-sm">
@@ -342,12 +344,14 @@ const Navbar = () => {
             >
               <div className="flex flex-col px-6 py-4 gap-4">
                 {navLinks.map((link) => (
-                  link.isNew ? (
+                  link.href.includes('#') ? (
+                    <a key={link.label} href={link.href} onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">
+                      {link.label}
+                    </a>
+                  ) : (
                     <Link key={link.label} to={link.href} onClick={() => setIsOpen(false)} className={`text-gray-600 hover:text-slate-900 font-semibold ${location.pathname === link.href ? 'text-blue-600' : ''}`}>
                       {link.label}
                     </Link>
-                  ) : (
-                    <a key={link.label} href={link.href} onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-slate-900 font-semibold">{link.label}</a>
                   )
                 ))}
                 <a href="#contact" onClick={() => setIsOpen(false)} className="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-center font-bold">
@@ -846,7 +850,7 @@ const Footer = () => {
               <img src="https://drive.google.com/thumbnail?id=10r344KT6-zbB5oPtuv5ZBHBUqUjxJzD7&sz=w800" alt="Ascension Agents Logo" className="h-10 md:h-12 w-auto" referrerPolicy="no-referrer" />
             </div>
             <p className="text-gray-500 max-w-sm">
-              Custom agent engineering teams built for your operations. Deployed inside your environment. Running from day one.
+              We build high-leverage, low-maintenance agent teams so your company runs smoother, scales faster, and stops bleeding money on tasks our digital employees can already do.
             </p>
           </div>
           
@@ -855,7 +859,7 @@ const Footer = () => {
             <ul className="space-y-3 text-gray-500">
               <li><a href="#how-it-works" className="hover:text-slate-900 transition-colors">How it Works</a></li>
               <li><Link to="/websites" className="hover:text-slate-900 transition-colors">Websites</Link></li>
-              <li><a href="#features" className="hover:text-slate-900 transition-colors">Capabilities</a></li>
+              <li><Link to="/journal" className="hover:text-slate-900 transition-colors">Ascension Journal</Link></li>
               <li><a href="#faq" className="hover:text-slate-900 transition-colors">FAQ</a></li>
             </ul>
           </div>
@@ -923,6 +927,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/websites" element={<WebsitesPage />} />
+            <Route path="/apps" element={<AppsPage />} />
+            <Route path="/journal" element={<JournalPage />} />
           </Routes>
         </main>
         <Footer />
