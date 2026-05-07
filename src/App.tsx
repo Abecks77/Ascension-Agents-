@@ -896,6 +896,11 @@ const ScrollToTop = () => {
 
 const HomePage = () => (
   <>
+    <Helmet>
+      <title>Ascension Agents | AI Workforce for High-Leverage Business</title>
+      <meta name="description" content="Custom AI Agent teams built to automate your most expensive workflows. Scale your business operations with our bespoke agent engineering." />
+      <link rel="canonical" href="https://ascensionagents.io/" />
+    </Helmet>
     <Hero />
     <WhoThisIsFor />
     <Positioning />
@@ -909,30 +914,38 @@ const HomePage = () => (
   </>
 );
 
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+
 export default function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="min-h-screen selection:bg-blue-100 relative w-full overflow-x-hidden">
-        {/* Global Background Decorations */}
-        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[120px]" />
-          <div className="absolute top-[20%] right-[-5%] w-[30%] h-[50%] bg-blue-500/5 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[10%] left-[5%] w-[35%] h-[35%] bg-blue-500/5 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-5%] right-[10%] w-[40%] h-[30%] bg-blue-500/5 rounded-full blur-[120px]" />
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="min-h-screen selection:bg-blue-100 relative w-full overflow-x-hidden">
+          {/* Global Background Decorations */}
+          <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[120px]" />
+            <div className="absolute top-[20%] right-[-5%] w-[30%] h-[50%] bg-blue-500/5 rounded-full blur-[120px]" />
+            <div className="absolute bottom-[10%] left-[5%] w-[35%] h-[35%] bg-blue-500/5 rounded-full blur-[120px]" />
+            <div className="absolute bottom-[-5%] right-[10%] w-[40%] h-[30%] bg-blue-500/5 rounded-full blur-[120px]" />
+          </div>
+          
+          <Navbar />
+          <Helmet>
+            <title>Ascension Agents | High-Performance AI Agent Systems</title>
+            <meta name="description" content="Build an AI workforce that runs your business behind the scenes. Custom AI agent engineering for high-leverage infrastructure." />
+          </Helmet>
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/websites" element={<WebsitesPage />} />
+              <Route path="/apps" element={<AppsPage />} />
+              <Route path="/journal" element={<JournalPage />} />
+            </Routes>
+          </main>
+          <Footer />
         </div>
-        
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/websites" element={<WebsitesPage />} />
-            <Route path="/apps" element={<AppsPage />} />
-            <Route path="/journal" element={<JournalPage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </HelmetProvider>
   );
 }

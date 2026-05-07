@@ -52,11 +52,18 @@ const featureList = [
   }
 ];
 
+import { Helmet } from 'react-helmet-async';
+
 const WebsitesPage = () => {
   const [activeTab, setActiveTab] = useState('Dashboard');
 
   return (
     <div className="min-h-screen pt-32 pb-20 relative">
+      <Helmet>
+        <title>High-Converting Business Websites | Ascension Agents</title>
+        <meta name="description" content="We build sales-focused websites and Automated CRMs (ACRM) that capture leads and scale your business operations 24/7." />
+        <link rel="canonical" href="https://ascensionagents.io/websites" />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Hero Section */}
         <div className="text-center mb-24">

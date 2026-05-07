@@ -19,6 +19,8 @@ const FadeIn: React.FC<{ delay?: number; className?: string; children: React.Rea
   </motion.div>
 );
 
+import { Helmet } from 'react-helmet-async';
+
 const CustomAppsPage = () => {
   const customSolutions = [
     {
@@ -135,6 +137,11 @@ const CustomAppsPage = () => {
 
   return (
     <div className="min-h-screen pt-32 pb-20 relative">
+      <Helmet>
+        <title>Custom AI Applications & Dashboards | Ascension Agents</title>
+        <meta name="description" content="We build bespoke internal tools, dashboards, and operational software that scales your unique business logic with high performance and reliability." />
+        <link rel="canonical" href="https://ascensionagents.io/apps" />
+      </Helmet>
       <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-orange-50/50 to-transparent -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
