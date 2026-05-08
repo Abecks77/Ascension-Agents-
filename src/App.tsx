@@ -9,7 +9,8 @@ import {
 } from 'lucide-react';
 import { 
   WhoThisIsFor, Positioning, WhatYouGet, WhatThisDoes, 
-  WhyAscension, DoYouQualify, Investment, PictureThis, Contact 
+  WhyAscension, DoYouQualify, Investment, PictureThis, Contact,
+  DualCTA
 } from './Sections';
 import WebsitesPage from './WebsitesPage';
 import JournalPage from './JournalPage';
@@ -19,6 +20,7 @@ interface FadeInProps {
   children: React.ReactNode;
   delay?: number;
   key?: React.Key;
+  className?: string;
 }
 
 const DashboardMockup = () => {
@@ -267,12 +269,13 @@ const DashboardMockup = () => {
   );
 };
 
-const FadeIn = ({ children, delay = 0 }: FadeInProps) => (
+const FadeIn = ({ children, delay = 0, className = "w-full" }: FadeInProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-100px" }}
     transition={{ duration: 0.6, delay }}
+    className={className}
   >
     {children}
   </motion.div>
@@ -294,7 +297,7 @@ const Navbar = () => {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "The Foundation", href: "/websites" },
-    { label: "Custom Apps", href: "/apps" },
+    { label: "Workflow Tools", href: "/apps" },
     { label: "Ascension Journal", href: "/journal" },
   ];
 
@@ -487,6 +490,9 @@ const ImpactSection = () => {
             </motion.div>
           </AnimatePresence>
         </div>
+        <FadeIn delay={0.4} className="flex justify-center mt-16">
+          <DualCTA exploreLink="#how-it-works" className="justify-center" />
+        </FadeIn>
       </div>
     </section>
   );
@@ -519,14 +525,7 @@ const Hero = () => {
           <p className="text-lg md:text-xl text-gray-500 mb-10 leading-relaxed max-w-2xl mx-auto font-medium">
             We build high-leverage, low-maintenance agent teams so your company runs smoother, scales faster, and stops bleeding money on tasks our digital employees can already do.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="bg-gradient-brand text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-xl shadow-orange-500/20 hover:scale-105">
-              Explore Agent systems <ArrowDown className="w-5 h-5" />
-            </button>
-            <a href="#impact" className="text-gray-500 px-8 py-4 font-bold hover:text-slate-900 transition-colors">
-              Book a discovery call
-            </a>
-          </div>
+          <DualCTA exploreLink="#impact" className="justify-center" />
         </motion.div>
 
         <motion.div

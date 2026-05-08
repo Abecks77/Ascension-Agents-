@@ -4,8 +4,10 @@ import {
   ArrowRight, Layout, Database, Shield, Zap, 
   BarChart3, Calendar, ClipboardList, Settings,
   Cpu, Lock, Search, MousePointer2, Smartphone,
-  CheckCircle2, Layers, LineChart, Users
+  CheckCircle2, Layers, LineChart, Users,
+  ArrowDown, Calendar as CalendarIcon
 } from 'lucide-react';
+import { DualCTA } from './Sections';
 
 const FadeIn: React.FC<{ delay?: number; className?: string; children: React.ReactNode }> = ({ children, delay = 0, className }) => (
   <motion.div
@@ -21,7 +23,7 @@ const FadeIn: React.FC<{ delay?: number; className?: string; children: React.Rea
 
 import { Helmet } from 'react-helmet-async';
 
-const CustomAppsPage = () => {
+const WorkflowToolsPage = () => {
   const customSolutions = [
     {
       title: "Business Dashboards",
@@ -138,7 +140,7 @@ const CustomAppsPage = () => {
   return (
     <div className="min-h-screen pt-32 pb-20 relative">
       <Helmet>
-        <title>Custom AI Applications & Dashboards | Ascension Agents</title>
+        <title>Workflow Tools & Dashboards | Ascension Agents</title>
         <meta name="description" content="We build bespoke internal tools, dashboards, and operational software that scales your unique business logic with high performance and reliability." />
         <link rel="canonical" href="https://ascensionagents.io/apps" />
       </Helmet>
@@ -149,13 +151,13 @@ const CustomAppsPage = () => {
         <div className="text-center max-w-3xl mx-auto mb-24">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-[10px] font-bold text-[#ff6b00] uppercase tracking-widest mb-6">
-              Custom Built Applications
+              Workflow Management Tools
             </div>
             <h1 className="text-4xl md:text-7xl font-bold text-slate-900 mb-8 tracking-tight">
               Software Built to Your <span className="text-gradient">Exact DNA.</span>
             </h1>
             <p className="text-xl text-gray-500 leading-relaxed font-medium">
-              We build custom internal tools, dashboards, and operational applications that eliminate friction and scale your unique business logic.
+              We build professional workflow tools, dashboards, and operational applications that eliminate friction and scale your unique business logic.
             </p>
           </FadeIn>
         </div>
@@ -190,6 +192,10 @@ const CustomAppsPage = () => {
             </FadeIn>
           ))}
         </div>
+
+        <FadeIn delay={0.3} className="flex justify-center mb-32">
+          <DualCTA exploreLink="#capabilities" className="justify-center" />
+        </FadeIn>
 
         {/* Technical Capabilities */}
         <div className="mb-32">
@@ -269,7 +275,7 @@ const CustomAppsPage = () => {
           <FadeIn>
             <div className="text-center mb-10 max-w-2xl mx-auto">
               <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Ready to Build Your System?</h2>
-              <p className="text-lg text-gray-500">Let's discuss the specific requirements for your custom application. We turn your operational vision into high-performance software.</p>
+              <p className="text-lg text-gray-500">Let's discuss the specific requirements for your workflow tool. We turn your operational vision into high-performance software.</p>
             </div>
             
             <div className="bg-white rounded-3xl p-8 md:p-10 border border-gray-200 shadow-2xl shadow-orange-500/10 text-left">
@@ -320,4 +326,4 @@ const CustomAppsPage = () => {
   );
 };
 
-export default CustomAppsPage;
+export default WorkflowToolsPage;

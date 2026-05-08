@@ -3,15 +3,17 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, Search, Calendar, Clock, User, 
   ChevronRight, ArrowUpRight, Filter, MessageSquare,
-  Zap, Bot, LineChart, Database
+  Zap, Bot, LineChart, Database, ArrowDown, Calendar as CalendarIcon
 } from 'lucide-react';
+import { DualCTA } from './Sections';
 import { Link } from 'react-router-dom';
 
-const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
+const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, delay }}
+    className={className}
   >
     {children}
   </motion.div>
@@ -156,6 +158,10 @@ const BlogPage = () => {
             </button>
           ))}
         </div>
+
+        <FadeIn delay={0.4} className="mb-16">
+          <DualCTA exploreLink="#articles" />
+        </FadeIn>
 
 
         {/* Regular Posts Grid */}

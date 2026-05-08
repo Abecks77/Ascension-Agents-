@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, Cpu, Workflow, Users, LineChart, MessageSquare, CheckCircle2, ArrowRight, Bot, Zap, Calendar as CalendarIcon, ShieldCheck, XCircle, Hexagon, PenTool, CircleDot, Play, Square, ChevronDown, Settings, RefreshCw, Target, Shield, Sliders, Clock, Box, DollarSign, TrendingUp, Brain, Network, ArrowDown } from 'lucide-react';
 
@@ -19,6 +20,23 @@ const FadeIn = ({ children, delay = 0, className = "w-full" }: FadeInProps) => (
   >
     {children}
   </motion.div>
+);
+
+export const DualCTA = ({ exploreLink = "#positioning", className = "" }: { exploreLink?: string, className?: string }) => (
+  <div className={`flex flex-col sm:flex-row gap-4 mt-10 ${className}`}>
+    <a 
+      href={exploreLink} 
+      className="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-lg shadow-gray-200 hover:scale-105"
+    >
+      Explore Ascension Agents <ArrowDown className="w-4 h-4" />
+    </a>
+    <a 
+      href="#contact" 
+      className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-gray-50 transition-all hover:scale-105"
+    >
+      Book a Discovery Call <CalendarIcon className="w-4 h-4" />
+    </a>
+  </div>
 );
 
 export const WhoThisIsFor = () => {
@@ -178,6 +196,9 @@ export const WhoThisIsFor = () => {
                 </AnimatePresence>
               </div>
             </div>
+          </FadeIn>
+          <FadeIn delay={0.3} className="flex justify-center mt-12">
+            <DualCTA exploreLink="#positioning" className="justify-center" />
           </FadeIn>
         </div>
       </div>
@@ -512,6 +533,9 @@ export const WhatYouGet = () => {
             </FadeIn>
           </div>
         </div>
+        <FadeIn delay={0.4} className="flex justify-center mt-12">
+          <DualCTA exploreLink="#what-this-does" className="justify-center" />
+        </FadeIn>
       </div>
     </section>
   );
@@ -789,6 +813,10 @@ export const WhyAscension = () => {
           <FadeIn delay={0.2} className="w-full">
             <AgentMindMap />
           </FadeIn>
+
+          <FadeIn delay={0.3} className="flex justify-center">
+            <DualCTA exploreLink="#investment" className="justify-center" />
+          </FadeIn>
         </div>
       </div>
     </section>
@@ -964,6 +992,9 @@ export const Investment = () => {
                 <p className="text-3xl font-bold text-slate-900">${Math.max(0, savings).toLocaleString()}</p>
               </div>
             </div>
+          </FadeIn>
+          <FadeIn delay={0.3} className="flex justify-center lg:justify-start col-span-full mt-12">
+            <DualCTA exploreLink="#timeline" />
           </FadeIn>
         </div>
       </div>

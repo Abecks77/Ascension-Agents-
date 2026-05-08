@@ -4,8 +4,10 @@ import {
   Globe, Layout, Code, Rocket, CheckCircle2, ArrowRight, 
   Smartphone, Zap, Eye, MousePointer2, Shield, Search,
   Monitor, Cpu, PhoneMissed, Send, MessageCircle, Calendar,
-  TrendingUp, Clock, Users, Star, MessageSquare, ArrowUpRight, Plus
+  TrendingUp, Clock, Users, Star, MessageSquare, ArrowUpRight, Plus,
+  ArrowDown, Calendar as CalendarIcon
 } from 'lucide-react';
+import { DualCTA } from './Sections';
 
 const FadeIn: React.FC<{ delay?: number; className?: string; children: React.ReactNode }> = ({ children, delay = 0, className }) => (
   <motion.div
@@ -78,11 +80,6 @@ const WebsitesPage = () => {
             <p className="text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
               Your website shouldn't just be an expensive business card. It should be your hardest-working employee, generating leads and closing sales 24/7.
             </p>
-            <div className="flex justify-center">
-              <button className="bg-gradient-brand text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center gap-3 hover:opacity-90 transition-all shadow-xl shadow-orange-500/20">
-                Start Your Project <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
           </FadeIn>
         </div>
 
@@ -100,6 +97,10 @@ const WebsitesPage = () => {
             </FadeIn>
           ))}
         </div>
+
+        <FadeIn delay={0.4} className="flex justify-center mb-24">
+          <DualCTA exploreLink="#process" className="justify-center" />
+        </FadeIn>
 
         {/* Process Section */}
         <FadeIn>
@@ -283,6 +284,9 @@ const WebsitesPage = () => {
               </div>
             </FadeIn>
           </div>
+          <FadeIn delay={0.7} className="flex justify-center mt-12">
+            <DualCTA exploreLink="#acrm" className="justify-center" />
+          </FadeIn>
         </div>
 
         {/* ACRM Section */}
