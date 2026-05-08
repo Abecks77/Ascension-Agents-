@@ -506,9 +506,15 @@ const Hero = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-[#ff6b00] animate-pulse" />
             Ascend beyond manual operations
           </div>
-          <h1 className="text-[28px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] font-bold leading-[1.1] mb-8 tracking-tight pb-2 overflow-wrap-anywhere">
-            <span className="block text-slate-900">Build An AI Workforce That Runs</span>
-            <span className="block text-gradient">Your Business Behind The Scenes.</span>
+          <h1 className="text-[28px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] font-bold leading-[1.2] md:leading-[1.1] mb-8 tracking-tight pb-2">
+            <span className="block md:inline">Build An AI Workforce</span>
+            <span className="hidden md:inline"> That Runs</span>
+            <br className="hidden md:block" />
+            <span className="block md:hidden">That Runs Your Business</span>
+            <span className="text-gradient block md:inline">
+              <span className="hidden md:inline">Your Business </span>
+              Behind The Scenes.
+            </span>
           </h1>
           <p className="text-lg md:text-xl text-gray-500 mb-10 leading-relaxed max-w-2xl mx-auto font-medium">
             We build high-leverage, low-maintenance agent teams so your company runs smoother, scales faster, and stops bleeding money on tasks our digital employees can already do.
