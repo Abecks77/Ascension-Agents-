@@ -293,7 +293,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "Ascension Sites", href: "/websites" },
+    { label: "The Foundation", href: "/websites" },
     { label: "Custom Apps", href: "/apps" },
     { label: "Ascension Journal", href: "/journal" },
   ];
@@ -858,7 +858,7 @@ const Footer = () => {
             <h4 className="font-bold mb-4 text-slate-900">Platform</h4>
             <ul className="space-y-3 text-gray-500">
               <li><a href="#how-it-works" className="hover:text-slate-900 transition-colors">How it Works</a></li>
-              <li><Link to="/websites" className="hover:text-slate-900 transition-colors">Websites</Link></li>
+              <li><Link to="/websites" className="hover:text-slate-900 transition-colors">The Foundation</Link></li>
               <li><Link to="/journal" className="hover:text-slate-900 transition-colors">Ascension Journal</Link></li>
               <li><a href="#faq" className="hover:text-slate-900 transition-colors">FAQ</a></li>
             </ul>
