@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, Cpu, Workflow, Users, LineChart, MessageSquare, CheckCircle2, ArrowRight, Bot, Zap, Calendar as CalendarIcon, ShieldCheck, XCircle, Hexagon, PenTool, CircleDot, Play, Square, ChevronDown, Settings, RefreshCw, Target, Shield, Sliders, Clock, Box, DollarSign, TrendingUp, Brain, Network, ArrowDown } from 'lucide-react';
+import { submitToWebhook } from './lib/webhook';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -1057,68 +1058,159 @@ export const PictureThis = () => {
   );
 };
 
-export const Contact = () => (
-  <section id="contact" className="py-24 relative overflow-hidden border-t border-gray-100">
-    {/* Techy Background Elements */}
-    <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-50 rounded-full blur-3xl opacity-50" />
-    </div>
+export const Contact = () => {
+  const [formData, setFormData] = React.useState({
+    fullName: '',
+    businessName: '',
+    email: '',
+    phone: '',
+    area: ''
+  });
+  const [status, setStatus] = React.useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10 w-full overflow-hidden">
-      <FadeIn>
-        <div className="text-center mb-12 px-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-[10px] font-bold text-[#ff6b00] uppercase tracking-widest mb-8">Next Steps</div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-slate-900 leading-tight break-words text-balance pb-1">Let's Build Your <span className="text-gradient">Agent System</span></h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Ready to stop trading time for output? Fill out the form below and we'll get in touch to discuss how an agentic system can transform your operations.
-          </p>
-        </div>
-        
-        <div className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl shadow-gray-200/50">
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2 text-left">
-                <label className="text-sm font-bold text-slate-900">Full Name</label>
-                <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all" placeholder="John Doe" />
-              </div>
-              <div className="space-y-2 text-left">
-                <label className="text-sm font-bold text-slate-900">Business Name</label>
-                <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all" placeholder="Acme Corp" />
-              </div>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2 text-left">
-                <label className="text-sm font-bold text-slate-900">Email Address</label>
-                <input type="email" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all" placeholder="john@example.com" />
-              </div>
-              <div className="space-y-2 text-left">
-                <label className="text-sm font-bold text-slate-900">Phone Number</label>
-                <input type="tel" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all" placeholder="(555) 123-4567" />
-              </div>
-            </div>
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
 
-            <div className="space-y-2 text-left">
-              <label className="text-sm font-bold text-slate-900">What area would you like to install an agentic system in?</label>
-              <select className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all bg-white text-slate-900">
-                <option value="">Select an area...</option>
-                <option value="lead-intake">Lead Intake & Qualification</option>
-                <option value="customer-support">Customer Support & Service</option>
-                <option value="sales-followup">Sales Follow-up & Nurture</option>
-                <option value="operations">Internal Operations & Workflows</option>
-                <option value="reputation">Reputation Management</option>
-                <option value="other">Other / Not Sure Yet</option>
-              </select>
-            </div>
+    const success = await submitToWebhook({
+      ...formData,
+      formType: 'Main Contact Form'
+    });
 
-            <div className="pt-6 text-center">
-              <button type="submit" className="w-full md:w-auto bg-gradient-brand text-white px-12 py-4 rounded-xl font-bold text-lg inline-flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-orange-500/20 hover:scale-105">
-                Submit Inquiry <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
-          </form>
-        </div>
-      </FadeIn>
-    </div>
-  </section>
-);
+    if (success) {
+      setStatus('success');
+      setFormData({
+        fullName: '',
+        businessName: '',
+        email: '',
+        phone: '',
+        area: ''
+      });
+    } else {
+      setStatus('error');
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  return (
+    <section id="contact" className="py-24 relative overflow-hidden border-t border-gray-100">
+      {/* Techy Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-50 rounded-full blur-3xl opacity-50" />
+      </div>
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10 w-full overflow-hidden">
+        <FadeIn>
+          <div className="text-center mb-12 px-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-[10px] font-bold text-[#ff6b00] uppercase tracking-widest mb-8">Next Steps</div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-slate-900 leading-tight break-words text-balance pb-1">Let's Build Your <span className="text-gradient">Agent System</span></h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Ready to stop trading time for output? Fill out the form below and we'll get in touch to discuss how an agentic system can transform your operations.
+            </p>
+          </div>
+          
+          <div className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl shadow-gray-200/50">
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2 text-left">
+                  <label className="text-sm font-bold text-slate-900">Full Name</label>
+                  <input 
+                    type="text" 
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    disabled={status === 'loading' || status === 'success'}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all" 
+                    placeholder="John Doe" 
+                  />
+                </div>
+                <div className="space-y-2 text-left">
+                  <label className="text-sm font-bold text-slate-900">Business Name</label>
+                  <input 
+                    type="text" 
+                    name="businessName"
+                    value={formData.businessName}
+                    onChange={handleChange}
+                    required
+                    disabled={status === 'loading' || status === 'success'}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all" 
+                    placeholder="Acme Corp" 
+                  />
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2 text-left">
+                  <label className="text-sm font-bold text-slate-900">Email Address</label>
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    disabled={status === 'loading' || status === 'success'}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all" 
+                    placeholder="john@example.com" 
+                  />
+                </div>
+                <div className="space-y-2 text-left">
+                  <label className="text-sm font-bold text-slate-900">Phone Number</label>
+                  <input 
+                    type="tel" 
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    disabled={status === 'loading' || status === 'success'}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all" 
+                    placeholder="(555) 123-4567" 
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2 text-left">
+                <label className="text-sm font-bold text-slate-900">What area would you like to install an agentic system in?</label>
+                <select 
+                  name="area"
+                  value={formData.area}
+                  onChange={handleChange}
+                  required
+                  disabled={status === 'loading' || status === 'success'}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all bg-white text-slate-900"
+                >
+                  <option value="">Select an area...</option>
+                  <option value="lead-intake">Lead Intake & Qualification</option>
+                  <option value="customer-support">Customer Support & Service</option>
+                  <option value="sales-followup">Sales Follow-up & Nurture</option>
+                  <option value="operations">Internal Operations & Workflows</option>
+                  <option value="reputation">Reputation Management</option>
+                  <option value="other">Other / Not Sure Yet</option>
+                </select>
+              </div>
+
+              <div className="pt-6 text-center">
+                <button 
+                  type="submit" 
+                  disabled={status === 'loading' || status === 'success'}
+                  className="w-full md:w-auto bg-gradient-brand text-white px-12 py-4 rounded-xl font-bold text-lg inline-flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-orange-500/20 hover:scale-105 disabled:opacity-50"
+                >
+                  {status === 'loading' ? 'Submitting...' : status === 'success' ? 'Inquiry Sent!' : 'Submit Inquiry'}
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+                {status === 'error' && <p className="text-red-500 mt-4 text-sm">Something went wrong. Please try again.</p>}
+                {status === 'success' && <p className="text-green-600 mt-4 text-sm font-bold">Thank you! We'll be in touch soon.</p>}
+              </div>
+            </form>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+};

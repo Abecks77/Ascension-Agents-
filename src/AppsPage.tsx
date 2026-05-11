@@ -23,7 +23,47 @@ const FadeIn: React.FC<{ delay?: number; className?: string; children: React.Rea
 
 import { Helmet } from 'react-helmet-async';
 
+import { submitToWebhook } from './lib/webhook';
+import { useState } from 'react';
+
 const WorkflowToolsPage = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: ''
+  });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    const success = await submitToWebhook({
+      ...formData,
+      formType: 'Apps Page Project Request'
+    });
+
+    if (success) {
+      setStatus('success');
+      setFormData({
+        name: '',
+        company: '',
+        email: '',
+        phone: ''
+      });
+    } else {
+      setStatus('error');
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.id]: e.target.value
+    }));
+  };
+
   const customSolutions = [
     {
       title: "Business Dashboards",
@@ -279,43 +319,91 @@ const WorkflowToolsPage = () => {
             </div>
             
             <div className="bg-white rounded-3xl p-8 md:p-10 border border-gray-200 shadow-2xl shadow-orange-500/10 text-left">
-              <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+              <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-2">
-                  <div className="flex flex-col gap-2">
+                   <div className="flex flex-col gap-2">
                     <label htmlFor="name" className="text-sm font-bold text-slate-900">Name</label>
-                    <input type="text" id="name" placeholder="John Doe" className="px-4 py-3 rounded-xl border border-gray-200 focus:border-[#ff6b00] focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-400" />
+                    <input 
+                      type="text" 
+                      id="name" 
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      disabled={status === 'loading' || status === 'success'}
+                      placeholder="John Doe" 
+                      className="px-4 py-3 rounded-xl border border-gray-200 focus:border-[#ff6b00] focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-400" 
+                    />
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="company" className="text-sm font-bold text-slate-900">Company Name</label>
-                    <input type="text" id="company" placeholder="Acme Corp" className="px-4 py-3 rounded-xl border border-gray-200 focus:border-[#ff6b00] focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-400" />
+                    <input 
+                      type="text" 
+                      id="company" 
+                      value={formData.company}
+                      onChange={handleChange}
+                      required
+                      disabled={status === 'loading' || status === 'success'}
+                      placeholder="Acme Corp" 
+                      className="px-4 py-3 rounded-xl border border-gray-200 focus:border-[#ff6b00] focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-400" 
+                    />
                   </div>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-2">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="email" className="text-sm font-bold text-slate-900">Email</label>
-                    <input type="email" id="email" placeholder="john@example.com" className="px-4 py-3 rounded-xl border border-gray-200 focus:border-[#ff6b00] focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-400" />
+                    <input 
+                      type="email" 
+                      id="email" 
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      disabled={status === 'loading' || status === 'success'}
+                      placeholder="john@example.com" 
+                      className="px-4 py-3 rounded-xl border border-gray-200 focus:border-[#ff6b00] focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-400" 
+                    />
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="phone" className="text-sm font-bold text-slate-900">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="(555) 123-4567" className="px-4 py-3 rounded-xl border border-gray-200 focus:border-[#ff6b00] focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-400" />
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      disabled={status === 'loading' || status === 'success'}
+                      placeholder="(555) 123-4567" 
+                      className="px-4 py-3 rounded-xl border border-gray-200 focus:border-[#ff6b00] focus:ring-2 focus:ring-orange-500/20 outline-none transition-all placeholder:text-gray-400" 
+                    />
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <div className="flex items-center h-5 mt-1">
-                    <input type="checkbox" id="a2p" className="w-5 h-5 rounded border-gray-300 text-[#ff6b00] focus:ring-[#ff6b00] focus:ring-offset-0 cursor-pointer accent-[#ff6b00]" required />
+                    <input 
+                      type="checkbox" 
+                      id="a2p" 
+                      className="w-5 h-5 rounded border-gray-300 text-[#ff6b00] focus:ring-[#ff6b00] focus:ring-offset-0 cursor-pointer accent-[#ff6b00]" 
+                      required 
+                      disabled={status === 'loading' || status === 'success'}
+                    />
                   </div>
                   <label htmlFor="a2p" className="text-xs text-slate-500 leading-relaxed cursor-pointer">
                     By submitting this form, you agree to receive SMS and email communications from Ascension OS regarding your inquiry. Message frequency varies. Message and data rates may apply. You can opt out at any time by replying STOP to SMS or clicking unsubscribe in emails.
                   </label>
                 </div>
 
-                <div className="pt-4">
-                  <button type="submit" className="w-full bg-gradient-brand text-white px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-all shadow-xl shadow-orange-500/20 flex items-center justify-center gap-2 group">
-                    Submit Project Request
+                <div className="pt-4 text-center">
+                  <button 
+                    type="submit" 
+                    disabled={status === 'loading' || status === 'success'}
+                    className="w-full bg-gradient-brand text-white px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-all shadow-xl shadow-orange-500/20 flex items-center justify-center gap-2 group disabled:opacity-50"
+                  >
+                    {status === 'loading' ? 'Submitting...' : status === 'success' ? 'Request Sent!' : 'Submit Project Request'}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
+                  {status === 'error' && <p className="text-red-500 mt-4 text-sm">Something went wrong. Please try again.</p>}
+                  {status === 'success' && <p className="text-green-600 mt-4 text-sm font-bold">Thank you! We'll be in touch soon.</p>}
                 </div>
               </form>
             </div>

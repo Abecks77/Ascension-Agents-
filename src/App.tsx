@@ -7,6 +7,7 @@ import {
   CheckCircle2, PhoneOff, CalendarX, Star, Phone, Bell, Search, Settings,
   Calendar as CalendarIcon, Mail, Clock, Megaphone, ArrowDown
 } from 'lucide-react';
+import { submitToWebhook } from './lib/webhook';
 import { 
   WhoThisIsFor, Positioning, WhatYouGet, WhatThisDoes, 
   WhyAscension, DoYouQualify, Investment, PictureThis, Contact,
@@ -822,23 +823,51 @@ const Testimonials = () => {
 };
 
 const Newsletter = () => {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    
+    const success = await submitToWebhook({
+      email,
+      formType: 'Newsletter Subscription'
+    });
+
+    if (success) {
+      setStatus('success');
+      setEmail('');
+    } else {
+      setStatus('error');
+    }
+  };
+
   return (
     <section className="py-12 bg-transparent">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <FadeIn>
           <h3 className="text-2xl font-bold mb-4 text-slate-900">Get insights on deploying AI agents in production.</h3>
           <p className="text-gray-600 mb-8">Join operations leaders learning how to automate their most expensive workflows.</p>
-          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
+          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={handleSubmit}>
               <input 
                 type="email" 
                 placeholder="Enter your email" 
                 className="flex-1 bg-white border border-gray-200 rounded-lg px-4 py-3 text-slate-900 focus:outline-none focus:border-[#0055ff] transition-colors"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={status === 'loading' || status === 'success'}
               />
-            <button type="submit" className="bg-slate-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-slate-800 transition-colors whitespace-nowrap">
-              Subscribe
+            <button 
+              type="submit" 
+              className={`bg-slate-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-slate-800 transition-colors whitespace-nowrap disabled:opacity-50`}
+              disabled={status === 'loading' || status === 'success'}
+            >
+              {status === 'loading' ? 'Submitting...' : status === 'success' ? 'Subscribed!' : 'Subscribe'}
             </button>
           </form>
+          {status === 'error' && <p className="text-red-500 mt-2 text-sm">Something went wrong. Please try again.</p>}
         </FadeIn>
       </div>
     </section>
