@@ -1023,7 +1023,7 @@ export const PictureThis = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <FadeIn className="lg:order-2 w-full">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-8">The Vision</div>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight break-words">Picture <span className="text-gradient">This</span></h2>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight break-words">Ascension <span className="text-gradient">Process</span></h2>
             <div className="space-y-6 text-lg text-gray-600">
               <p>Twelve weeks from now your lead follow-up is running automatically. Your reputation is building without anyone managing it. Your team is working on the things that actually grow the business.</p>
               <p className="font-bold text-xl text-slate-900 my-8">You open your dashboard on a Tuesday morning and everything is moving the way it should. Without you having to touch it.</p>
@@ -1043,7 +1043,7 @@ export const PictureThis = () => {
                     <div className={`w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border shadow-sm transition-all duration-300 cursor-pointer ${timeline === i ? 'border-blue-500 bg-blue-50/50 scale-[1.02]' : 'border-gray-100 bg-white hover:border-gray-300'}`} onClick={() => setTimeline(i)}>
                       <div className="flex items-center justify-between mb-1">
                         <h4 className="font-bold text-slate-900">{milestone.title}</h4>
-                        <span className={`text-xs font-bold px-2 py-1 rounded-full ${timeline >= i ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500'}`}>{milestone.week}</span>
+                        <span className={`text-xs font-bold px-2 py-1 rounded-full whitespace-nowrap ${timeline >= i ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500'}`}>{milestone.week}</span>
                       </div>
                       <p className="text-sm text-gray-600">{milestone.desc}</p>
                     </div>
