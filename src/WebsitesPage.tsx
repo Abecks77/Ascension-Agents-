@@ -102,7 +102,7 @@ const WebsitesPage = () => {
       <Helmet>
         <title>High-Converting Business Websites | Ascension Agents</title>
         <meta name="description" content="We build sales-focused websites and Automated CRMs (ACRM) that capture leads and scale your business operations 24/7." />
-        <link rel="canonical" href="https://ascensionagents.io/websites" />
+        <link rel="canonical" href="https://ascensionagents.xyz/websites" />
       </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Hero Section */}

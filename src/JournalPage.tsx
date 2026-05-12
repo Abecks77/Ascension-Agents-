@@ -132,7 +132,7 @@ const BlogPage = () => {
       <Helmet>
         <title>Ascension Journal | AI Strategy & Engineering Insights</title>
         <meta name="description" content="Explore our latest thoughts on AI agents, autonomous systems, and high-leverage business operations. Stay ahead with insights from Ascension Agents." />
-        <link rel="canonical" href="https://ascensionagents.io/journal" />
+        <link rel="canonical" href="https://ascensionagents.xyz/journal" />
       </Helmet>
       {/* Background Accents (Consistent with other pages) */}
       <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-orange-50/50 to-transparent -z-10" />

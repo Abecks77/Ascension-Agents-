@@ -182,7 +182,7 @@ const WorkflowToolsPage = () => {
       <Helmet>
         <title>Workflow Tools & Dashboards | Ascension Agents</title>
         <meta name="description" content="We build bespoke internal tools, dashboards, and operational software that scales your unique business logic with high performance and reliability." />
-        <link rel="canonical" href="https://ascensionagents.io/apps" />
+        <link rel="canonical" href="https://ascensionagents.xyz/apps" />
       </Helmet>
       <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-orange-50/50 to-transparent -z-10" />
 

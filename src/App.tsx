@@ -173,7 +173,7 @@ const DashboardMockup = () => {
         <div className="flex-1 flex flex-col overflow-hidden min-h-[500px] md:min-h-0">
           <div className="h-16 border-b border-gray-100 flex items-center justify-between px-4 md:px-8 bg-white shrink-0">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100/50 border border-gray-200 overflow-hidden">
-              <span className="text-xs font-medium text-gray-500 truncate">app.ascensionagents.io / {activeData.name.toLowerCase().replace(/\s+/g, '-')}</span>
+              <span className="text-xs font-medium text-gray-500 truncate">app.ascensionagents.xyz / {activeData.name.toLowerCase().replace(/\s+/g, '-')}</span>
             </div>
             <div className="flex items-center gap-4 shrink-0 px-2">
               <Bell className="w-4 h-4 text-gray-400" />
@@ -933,7 +933,7 @@ const HomePage = () => (
     <Helmet>
       <title>Ascension Agents | AI Workforce for High-Leverage Business</title>
       <meta name="description" content="Custom AI Agent teams built to automate your most expensive workflows. Scale your business operations with our bespoke agent engineering." />
-      <link rel="canonical" href="https://ascensionagents.io/" />
+      <link rel="canonical" href="https://ascensionagents.xyz/" />
     </Helmet>
     <Hero />
     <WhoThisIsFor />
