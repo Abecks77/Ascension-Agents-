@@ -5,7 +5,6 @@ import {
   ChevronRight, ArrowUpRight, Filter, MessageSquare,
   Zap, Bot, LineChart, Database, ArrowDown, Calendar as CalendarIcon
 } from 'lucide-react';
-import { DualCTA } from './Sections';
 import { Link } from 'react-router-dom';
 
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => (
@@ -38,7 +37,7 @@ const articles = [
       "The follow-up to last week's proposal went out while you slept. The new inquiry that came in at 11pm has been acknowledged, qualified, and scheduled. The weekly report is already in your inbox, not waiting on anyone to compile it.",
       "You open your laptop. The first thing on the agenda is the thing you actually want to work on.",
       "That is not a better version of your current business. It is your business running the way it was supposed to before the overhead took over.",
-      "AscensionAgents.io builds the digital workforces that create that version. The agents handle the pattern. The scheduling, the follow-ups, the reporting, the handoffs. What comes back to you is not just recovered hours. It is the focus to use them on the work that actually required you to show up.",
+      "AscensionAgents.xyz builds the digital workforces that create that version. The agents handle the pattern. The scheduling, the follow-ups, the reporting, the handoffs. What comes back to you is not just recovered hours. It is the focus to use them on the work that actually required you to show up.",
       "You built something worth running. You just should not have to run all of it yourself."
     ],
     category: "AI Strategy",
@@ -58,11 +57,11 @@ const articles = [
       "Research published in April 2026 tracked agentic AI performance across five common business task categories. The average time reduction was 66.8% compared to completing the same tasks manually. Budget analysis took 6 minutes instead of 21. Vendor sourcing took 10 minutes instead of 22. These are not creative tasks. They are tasks that need to happen consistently, and that consistency no longer requires a person.",
       "Microsoft's 2026 Work Trend Index found that 66% of people using AI agents report spending more time on high-value work as a direct result. The administrative layer is getting smaller. The work underneath it is finally getting room to breathe.",
       "Gartner projects that by the end of 2026, 40% of enterprise applications will include task-specific AI agents. The businesses building those workflows now are not doing it because it sounds compelling. They are doing it because the cost of not doing it is measured in hours, and hours have a price.",
-      "If you bill your time, you know exactly what 10 recovered hours per week is worth. If you run a team, you multiply that number by everyone on it. At AscensionAgents.io, we work with businesses running that math and deciding the status quo is no longer affordable.",
+      "If you bill your time, you know exactly what 10 recovered hours per week is worth. If you run a team, you multiply that number by everyone on it. At AscensionAgents.xyz, we work with businesses running that math and deciding the status quo is no longer affordable.",
       "There is a specific morning when it lands differently. You open your laptop and the follow-ups have already gone out. The report is already compiled. The thing that usually eats your first two hours is already handled. The first item on the agenda is the work that actually needed you to show up for it.",
-      "AscensionAgents.io builds the AI agents for business that create that morning. The pattern work, the repetitive work, the trackable work, and the never-ending work is handled. What comes back is not just time. It is the focus to spend it on something that only you can do.",
+      "AscensionAgents.xyz builds the AI agents for business that create that morning. The pattern work, the repetitive work, the trackable work, and the never-ending work is handled. What comes back is not just time. It is the focus to spend it on something that only you can do.",
       "AI agents for business are no longer just a technology advantage. They are becoming a time advantage. And for companies buried under admin work, follow-ups, reporting, research, task management, and repetitive operations, that time can change everything.",
-      "Ready to get your week back? AscensionAgents.io helps businesses build AI agents that handle the repetitive work, so your team can focus on the work that actually moves the business forward. Build Your AI Workforce With Ascension Agents. Start creating the systems that give your team their time back."
+      "Ready to get your week back? AscensionAgents.xyz helps businesses build AI agents that handle the repetitive work, so your team can focus on the work that actually moves the business forward. Build Your AI Workforce With Ascension Agents. Start creating the systems that give your team their time back."
     ],
     category: "Future of Work",
     date: "May 12, 2026",
@@ -190,7 +189,14 @@ const BlogPage = () => {
 
         {!selectedPost && (
           <FadeIn delay={0.4} className="mb-16">
-            <DualCTA exploreLink="#articles" />
+            <div className="flex flex-col sm:flex-row gap-4 mt-10">
+              <a 
+                href="#articles" 
+                className="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-lg shadow-gray-200 hover:scale-105"
+              >
+                Explore Ascension Journal <ArrowDown className="w-4 h-4" />
+              </a>
+            </div>
           </FadeIn>
         )}
 
@@ -230,7 +236,7 @@ const BlogPage = () => {
                     <div className="w-12 h-12 rounded-full bg-gradient-brand shadow-lg" />
                     <div>
                       <div className="font-bold text-slate-900 text-lg">{selectedPost.author}</div>
-                      <div className="text-sm text-gray-500">AscensionAgents.io</div>
+                      <div className="text-sm text-gray-500">AscensionAgents.xyz</div>
                     </div>
                   </div>
                 </div>
