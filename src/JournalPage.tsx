@@ -47,6 +47,29 @@ const articles = [
     author: "Sloane Mercer",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
     featured: true
+  },
+  {
+    id: 2,
+    title: "How AI Agents for Business Are Giving People Their Weeks Back",
+    excerpt: "AI agents for business recover a median 6.4 hours per week per person. Here is what the 2026 data shows and what it means for how you work.",
+    content: [
+      "The to-do list never actually gets done. It just changes shape. New items land before the old ones clear, and the work that genuinely needs your attention keeps getting bumped to tomorrow. For people who have built agentic AI systems into how they operate, something different is happening. A median of 6.4 hours per week is coming back. That is the figure from a 2026 analysis tracking knowledge workers using production AI agents in real business environments. For senior-level professionals, the number climbs to 10 to 12 hours. That is not a rounding error. That is one to two full workdays, returned every single week.",
+      "This is not about a smarter inbox. It is about removing an entire category of work from your plate permanently. The hours are not coming back because AI is drafting your emails faster. They are coming back because agentic workflows complete tasks end to end, without a human required at each step.",
+      "Research published in April 2026 tracked agentic AI performance across five common business task categories. The average time reduction was 66.8% compared to completing the same tasks manually. Budget analysis took 6 minutes instead of 21. Vendor sourcing took 10 minutes instead of 22. These are not creative tasks. They are tasks that need to happen consistently, and that consistency no longer requires a person.",
+      "Microsoft's 2026 Work Trend Index found that 66% of people using AI agents report spending more time on high-value work as a direct result. The administrative layer is getting smaller. The work underneath it is finally getting room to breathe.",
+      "Gartner projects that by the end of 2026, 40% of enterprise applications will include task-specific AI agents. The businesses building those workflows now are not doing it because it sounds compelling. They are doing it because the cost of not doing it is measured in hours, and hours have a price.",
+      "If you bill your time, you know exactly what 10 recovered hours per week is worth. If you run a team, you multiply that number by everyone on it. At AscensionAgents.io, we work with businesses running that math and deciding the status quo is no longer affordable.",
+      "There is a specific morning when it lands differently. You open your laptop and the follow-ups have already gone out. The report is already compiled. The thing that usually eats your first two hours is already handled. The first item on the agenda is the work that actually needed you to show up for it.",
+      "AscensionAgents.io builds the AI agents for business that create that morning. The pattern work, the repetitive work, the trackable work, and the never-ending work is handled. What comes back is not just time. It is the focus to spend it on something that only you can do.",
+      "AI agents for business are no longer just a technology advantage. They are becoming a time advantage. And for companies buried under admin work, follow-ups, reporting, research, task management, and repetitive operations, that time can change everything.",
+      "Ready to get your week back? AscensionAgents.io helps businesses build AI agents that handle the repetitive work, so your team can focus on the work that actually moves the business forward. Build Your AI Workforce With Ascension Agents. Start creating the systems that give your team their time back."
+    ],
+    category: "Future of Work",
+    date: "May 12, 2026",
+    readTime: "5 min read",
+    author: "Sloane Mercer",
+    image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=800&q=80",
+    featured: false
   }
 ];
 
