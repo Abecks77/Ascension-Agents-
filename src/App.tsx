@@ -297,7 +297,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "The Foundation", href: "/websites" },
+    { label: "Website Employee's", href: "/websites" },
     { label: "Workflow Tools", href: "/apps" },
     { label: "Ascension Journal", href: "/journal" },
   ];
@@ -876,7 +876,7 @@ const Newsletter = () => {
 
 const Footer = () => {
   return (
-    <footer className="pt-16 pb-8">
+    <footer className="pt-16 pb-8 border-t border-gray-200 mt-12">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-2">
@@ -892,7 +892,7 @@ const Footer = () => {
             <h4 className="font-bold mb-4 text-slate-900">Platform</h4>
             <ul className="space-y-3 text-gray-500">
               <li><a href="#how-it-works" className="hover:text-slate-900 transition-colors">How it Works</a></li>
-              <li><Link to="/websites" className="hover:text-slate-900 transition-colors">The Foundation</Link></li>
+              <li><Link to="/websites" className="hover:text-slate-900 transition-colors">Website Employee's</Link></li>
               <li><Link to="/journal" className="hover:text-slate-900 transition-colors">Ascension Journal</Link></li>
               <li><a href="#faq" className="hover:text-slate-900 transition-colors">FAQ</a></li>
             </ul>

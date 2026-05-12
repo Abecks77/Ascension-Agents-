@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Cpu, Workflow, Users, LineChart, MessageSquare, CheckCircle2, ArrowRight, Bot, Zap, Calendar as CalendarIcon, ShieldCheck, XCircle, Hexagon, PenTool, CircleDot, Play, Square, ChevronDown, Settings, RefreshCw, Target, Shield, Sliders, Clock, Box, DollarSign, TrendingUp, Brain, Network, ArrowDown } from 'lucide-react';
+import { Search, Cpu, Workflow, Users, LineChart, MessageSquare, CheckCircle2, ArrowRight, Bot, Zap, Calendar as CalendarIcon, ShieldCheck, XCircle, Hexagon, PenTool, CircleDot, Play, Square, ChevronDown, Settings, RefreshCw, Target, Shield, Sliders, Clock, Box, DollarSign, TrendingUp, Brain, Network, ArrowDown, Globe, LayoutDashboard } from 'lucide-react';
 import { submitToWebhook } from './lib/webhook';
 
 interface FadeInProps {
@@ -1208,6 +1208,36 @@ export const Contact = () => {
                 {status === 'success' && <p className="text-green-600 mt-4 text-sm font-bold">Thank you! We'll be in touch soon.</p>}
               </div>
             </form>
+          </div>
+          
+          <div className="mt-16 text-center">
+            <h3 className="text-2xl font-bold mb-8 text-slate-900">Looking for something else?</h3>
+            <div className="grid md:grid-cols-2 gap-6 text-left">
+              <Link to="/websites" className="group bg-white rounded-3xl p-8 border border-gray-100 shadow-xl shadow-gray-200/50 hover:border-gray-200 hover:shadow-2xl transition-all flex flex-col">
+                <div className="w-12 h-12 rounded-xl bg-orange-50 text-[#ff6b00] flex items-center justify-center mb-6">
+                  <Globe className="w-6 h-6" />
+                </div>
+                <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#ff6b00] transition-colors">Make Your Website An Employee</h4>
+                <p className="text-gray-600 mb-6 leading-relaxed flex-1">
+                  Stop treating your website like a digital brochure. We build high-performance, conversion-optimized systems designed to qualify leads and generate pipeline while you sleep.
+                </p>
+                <div className="flex items-center text-[#ff6b00] font-bold text-sm gap-2">
+                  Explore Websites <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+              <Link to="/apps" className="group bg-white rounded-3xl p-8 border border-gray-100 shadow-xl shadow-gray-200/50 hover:border-gray-200 hover:shadow-2xl transition-all flex flex-col">
+                <div className="w-12 h-12 rounded-xl bg-orange-50 text-[#ff6b00] flex items-center justify-center mb-6">
+                  <LayoutDashboard className="w-6 h-6" />
+                </div>
+                <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#ff6b00] transition-colors">Custom Application Build Out</h4>
+                <p className="text-gray-600 mb-6 leading-relaxed flex-1">
+                  Off-the-shelf software forces you to change how you work. We build custom dashboards, task managers, and operational tools that adapt specifically to your business logic.
+                </p>
+                <div className="flex items-center text-[#ff6b00] font-bold text-sm gap-2">
+                  Explore Workflow Tools <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            </div>
           </div>
         </FadeIn>
       </div>
