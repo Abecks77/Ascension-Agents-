@@ -24,64 +24,29 @@ const categories = ["All", "AI Strategy", "Engineering", "Case Studies", "Future
 const articles = [
   {
     id: 1,
-    title: "How to Build a High-Leverage AI Workforce in 2026",
-    excerpt: "The shift from generative AI tools to autonomous agent teams is here. Learn the architecture required to build systems that think, reason, and execute.",
+    title: "You Built This. You Shouldn't Be Running All of It.",
+    excerpt: "The people who build things worth building usually do it because they are extraordinary at something specific. Then the thing grows, and the work they are brilliant at becomes a fraction of what fills their day.",
+    content: [
+      "The people who build things worth building usually do it because they are extraordinary at something specific. Writing code. Closing deals. Understanding people. Designing systems that work. For a while, that is exactly what the job is. Then the thing grows, and slowly, the work they are actually brilliant at becomes a fraction of what fills their day. The rest is everything the growth brought with it.",
+      "That \"everything else\" is not the hard part. It is the relentless part. Scheduling, following up, pulling reports, sending confirmations, updating records, chasing approvals. None of it requires judgment. All of it demands time. And it keeps expanding to fill whatever space you give it.",
+      "This is not a time management problem. No calendar system or productivity framework fixes it. It is a structural problem. You are spending your best hours doing work that does not need you, and the work that does need you is waiting.",
+      "## The Tasks That Should Not Require a Person",
+      "According to Microsoft's 2025 Work Trend Index, knowledge workers now spend more than 60% of their working hours on coordination and communication rather than the core output they were hired to produce. That number has climbed every year for the past five years. For people running their own operations without a team to redistribute the load, it runs higher.",
+      "The work that AI agents handle first is precisely this category. Not creative decisions. Not relationship judgment. Pattern work. Predictable, rule-following tasks that need to happen consistently regardless of whether anyone has the bandwidth, remembered, or is having a hard week.",
+      "A 2025 Gartner analysis found that businesses deploying agentic workflows for operational tasks reported reclaiming between 10 and 20 hours per person per week on work previously handled manually. That is not a rounding error. That is a restructuring of what a workday looks like.",
+      "## What Tuesday Looks Like When the Pattern Work Is Gone",
+      "The follow-up to last week's proposal went out while you slept. The new inquiry that came in at 11pm has been acknowledged, qualified, and scheduled. The weekly report is already in your inbox, not waiting on anyone to compile it.",
+      "You open your laptop. The first thing on the agenda is the thing you actually want to work on.",
+      "That is not a better version of your current business. It is your business running the way it was supposed to before the overhead took over.",
+      "AscensionAgents.io builds the digital workforces that create that version. The agents handle the pattern. The scheduling, the follow-ups, the reporting, the handoffs. What comes back to you is not just recovered hours. It is the focus to use them on the work that actually required you to show up.",
+      "You built something worth running. You just should not have to run all of it yourself."
+    ],
     category: "AI Strategy",
-    date: "May 12, 2026",
-    readTime: "8 min read",
-    author: "Adam Beck",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
+    date: "May 11, 2026",
+    readTime: "4 min read",
+    author: "Sloane Mercer",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
     featured: true
-  },
-  {
-    id: 2,
-    title: "Case Study: Scaling Support to 1M Users with 2 Human Agents",
-    excerpt: "Nexus Industries cut their resolution times by 75% using our tiered agent system. Here's exactly how the handoff works.",
-    category: "Case Studies",
-    date: "May 8, 2026",
-    readTime: "12 min read",
-    author: "Sarah Jenkins",
-    image: "https://images.unsplash.com/photo-1551288049-bbbda536ad79?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 3,
-    title: "Avoiding the 'Agent Loop': Principles of Reliable AI Workflows",
-    excerpt: "Agents that hallucinate or get stuck in infinite loops are a liability. We share our internal safety protocols for production deployments.",
-    category: "Engineering",
-    date: "May 5, 2026",
-    readTime: "6 min read",
-    author: "Michael Chen",
-    image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 4,
-    title: "The Death of the Mid-Level Admin Task",
-    excerpt: "Why digital employees are replacing standard administrative pipelines and what it means for your local business headcount.",
-    category: "Future of Work",
-    date: "Apr 28, 2026",
-    readTime: "10 min read",
-    author: "Adam Beck",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 5,
-    title: "Integrating AI Agents with Legacy ERP Systems",
-    excerpt: "A deep dive into bridging the gap between cutting-edge LLMs and 20-year-old database architectures.",
-    category: "Engineering",
-    date: "Apr 22, 2026",
-    readTime: "15 min read",
-    author: "Sarah Jenkins",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 6,
-    title: "3 Patterns for Human-in-the-Loop Validation",
-    excerpt: "Sometimes you need a person to check the work. These are the most efficient ways to insert humans into the agent loop.",
-    category: "AI Strategy",
-    date: "Apr 15, 2026",
-    readTime: "5 min read",
-    author: "Michael Chen",
-    image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
@@ -92,6 +57,7 @@ import { submitToWebhook } from './lib/webhook';
 const BlogPage = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedPost, setSelectedPost] = useState<typeof articles[0] | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -181,77 +147,165 @@ const BlogPage = () => {
         </div>
 
         {/* Categories Bar */}
-        <div className="flex overflow-x-auto pb-4 mb-12 gap-2 hide-scrollbar">
-          {categories.map((cat, i) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all border ${
-                activeCategory === cat 
-                ? 'bg-slate-900 border-slate-900 text-white shadow-lg shadow-gray-200' 
-                : 'bg-white border-gray-100 text-gray-500 hover:border-gray-300 hover:text-slate-900'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <FadeIn delay={0.4} className="mb-16">
-          <DualCTA exploreLink="#articles" />
-        </FadeIn>
-
-
-        {/* Regular Posts Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-          <AnimatePresence mode="popLayout">
-            {regularPosts.map((post, i) => (
-              <motion.div
-                layout
-                key={post.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
+        {!selectedPost && (
+          <div className="flex overflow-x-auto pb-4 mb-12 gap-2 hide-scrollbar">
+            {categories.map((cat, i) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-6 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all border ${
+                  activeCategory === cat 
+                  ? 'bg-slate-900 border-slate-900 text-white shadow-lg shadow-gray-200' 
+                  : 'bg-white border-gray-100 text-gray-500 hover:border-gray-300 hover:text-slate-900'
+                }`}
               >
-                <Link to={`/journal/${post.id}`} className="group flex flex-col h-full bg-white rounded-3xl border border-gray-100 hover:border-gray-200 transition-all hover:shadow-2xl hover:shadow-gray-200/50 overflow-hidden">
-                  <div className="h-48 overflow-hidden relative">
-                    <img 
-                      src={post.image} 
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-bold text-slate-900 border border-gray-200 uppercase">
-                        {post.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-8 flex-1 flex flex-col">
-                    <div className="flex items-center gap-3 mb-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                      <Calendar className="w-3 h-3" />
-                      {post.date}
-                      <span className="text-gray-200">•</span>
-                      <Clock className="w-3 h-3" />
-                      {post.readTime}
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-[#ff6b00] transition-colors leading-tight">
-                      {post.title}
-                    </h3>
-                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 mb-6">
-                      {post.excerpt}
-                    </p>
-                    <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-gradient-brand" />
-                        <span className="text-xs font-bold text-slate-900">{post.author}</span>
-                      </div>
-                      <ArrowUpRight className="w-5 h-5 text-gray-300 group-hover:text-[#ff6b00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
+                {cat}
+              </button>
             ))}
+          </div>
+        )}
+
+        {!selectedPost && (
+          <FadeIn delay={0.4} className="mb-16">
+            <DualCTA exploreLink="#articles" />
+          </FadeIn>
+        )}
+
+
+        {/* Content Area */}
+        <div className="mb-20">
+          <AnimatePresence mode="wait">
+            {selectedPost ? (
+              <motion.div
+                key="article-detail"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="max-w-4xl mx-auto"
+              >
+                <button 
+                  onClick={() => setSelectedPost(null)}
+                  className="flex items-center gap-2 text-[#ff6b00] font-bold text-sm mb-8 hover:gap-3 transition-all"
+                >
+                  <ArrowRight className="w-4 h-4 rotate-180" /> Back to Journal
+                </button>
+
+                <div className="mb-12">
+                  <div className="flex items-center gap-3 mb-6 text-xs font-bold text-gray-400 uppercase tracking-widest">
+                    <span className="px-3 py-1 bg-orange-50 text-[#ff6b00] rounded-full">{selectedPost.category}</span>
+                    <span>•</span>
+                    <Calendar className="w-3 h-3" />
+                    {selectedPost.date}
+                    <span>•</span>
+                    <Clock className="w-3 h-3" />
+                    {selectedPost.readTime}
+                  </div>
+                  <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-8 leading-tight">
+                    {selectedPost.title}
+                  </h1>
+                  <div className="flex items-center gap-4 mb-12 pb-12 border-b border-gray-100">
+                    <div className="w-12 h-12 rounded-full bg-gradient-brand shadow-lg" />
+                    <div>
+                      <div className="font-bold text-slate-900 text-lg">{selectedPost.author}</div>
+                      <div className="text-sm text-gray-500">AscensionAgents.io</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="prose prose-lg max-w-none text-gray-600 leading-relaxed space-y-8">
+                  {selectedPost.content?.map((paragraph, i) => (
+                    paragraph.startsWith('##') ? (
+                      <h2 key={i} className="text-2xl font-bold text-slate-900 pt-4">
+                        {paragraph.replace('## ', '')}
+                      </h2>
+                    ) : (
+                      <p key={i} className="text-lg">
+                        {paragraph}
+                      </p>
+                    )
+                  ))}
+                </div>
+
+                <div className="mt-20 p-8 md:p-12 bg-slate-900 rounded-3xl text-white relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 blur-[100px] -z-0" />
+                  <div className="relative z-10">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4">Want help automating your operations?</h3>
+                    <p className="text-gray-400 mb-8 max-w-xl text-lg">We build custom agent teams that handle follow-ups, data entry, and coordination while you stay focused on higher-leverage work.</p>
+                    <button 
+                      onClick={() => {
+                        setSelectedPost(null);
+                        setTimeout(() => {
+                           const contact = document.getElementById('contact');
+                           if (contact) contact.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                      }}
+                      className="bg-[#ff6b00] text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg shadow-orange-500/20"
+                    >
+                      Book a Strategy Audit
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="article-grid"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {filteredArticles.map((post, i) => (
+                  <motion.div
+                    layout
+                    key={post.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <div 
+                      onClick={() => setSelectedPost(post)}
+                      className="group flex flex-col h-full bg-white rounded-3xl border border-gray-100 hover:border-gray-200 transition-all hover:shadow-2xl hover:shadow-gray-200/50 overflow-hidden cursor-pointer"
+                    >
+                      <div className="h-48 overflow-hidden relative">
+                        <img 
+                          src={post.image} 
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-bold text-slate-900 border border-gray-200 uppercase">
+                            {post.category}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-8 flex-1 flex flex-col">
+                        <div className="flex items-center gap-3 mb-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                          <Calendar className="w-3 h-3" />
+                          {post.date}
+                          <span className="text-gray-200">•</span>
+                          <Clock className="w-3 h-3" />
+                          {post.readTime}
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-[#ff6b00] transition-colors leading-tight">
+                          {post.title}
+                        </h3>
+                        <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 mb-6">
+                          {post.excerpt}
+                        </p>
+                        <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 rounded-full bg-gradient-brand" />
+                            <span className="text-xs font-bold text-slate-900">{post.author}</span>
+                          </div>
+                          <ArrowUpRight className="w-5 h-5 text-gray-300 group-hover:text-[#ff6b00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
 
