@@ -816,7 +816,7 @@ export const WhyAscension = () => {
           </FadeIn>
 
           <FadeIn delay={0.3} className="flex justify-center">
-            <DualCTA exploreLink="#investment" className="justify-center" />
+            <DualCTA exploreLink="#transformation" className="justify-center" />
           </FadeIn>
         </div>
       </div>
@@ -911,17 +911,11 @@ export const DoYouQualify = () => {
   );
 };
 
-export const Investment = () => {
-  const [months, setMonths] = React.useState(12);
-  const opsHireMonthly = 5000;
-  const systemMonthly = 2500;
-  
-  const opsTotal = opsHireMonthly * months;
-  const systemTotal = systemMonthly * months;
-  const savings = opsTotal - systemTotal;
+export const Transformation = () => {
+  const [view, setView] = React.useState<'before' | 'after'>('before');
 
   return (
-    <section id="investment" className="py-24 relative overflow-hidden border-t border-gray-100">
+    <section id="transformation" className="py-24 relative overflow-hidden border-t border-gray-100">
       {/* Techy Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -right-20 w-96 h-96 bg-orange-50 rounded-full blur-3xl opacity-50" />
@@ -930,71 +924,74 @@ export const Investment = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-[10px] font-bold text-[#ff6b00] uppercase tracking-widest mb-8">Investment</div>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight break-words text-balance px-1">Our Custom Ascension Agents Build out runs on a <span className="text-gradient">monthly recurring cycle.</span></h2>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-[10px] font-bold text-[#ff6b00] uppercase tracking-widest mb-8">The Transformation</div>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-8 text-slate-900 leading-tight break-words text-balance px-1">Stop scaling your <span className="text-gradient">headaches.</span> Scale your leverage.</h2>
             <div className="space-y-6 text-lg text-gray-600">
-              <p>Pricing scales based on the complexity of your operations and the number of systems we're deploying and maintaining.</p>
-              <p>That's not a small number. But consider what it's replacing.</p>
-              <p className="font-semibold text-slate-900 mt-8">Most clients see the system pay for itself within the first 90 days.</p>
-              <p className="text-sm text-gray-500 italic">Financing is available for qualified engagements.</p>
+              <p>Right now, your growth is bottlenecked by human bandwidth. Every new client means more manual onboarding, more follow-ups, and more things slipping through the cracks.</p>
+              <p>When you install an Ascension Agent System, you aren't just saving time. You're fundamentally changing how your business operates.</p>
+              <p className="font-semibold text-slate-900 mt-8">Your constraint shifts from "how many hours do we have?" to "how much volume can we attract?"</p>
             </div>
           </FadeIn>
 
           <FadeIn delay={0.2}>
             <div className="bg-white rounded-2xl border border-gray-200 shadow-xl shadow-gray-200/50 p-6 md:p-8">
-              <h3 className="text-xl font-bold text-slate-900 mb-6">Cost Comparison Calculator</h3>
-              
-              <div className="mb-8">
-                <div className="flex justify-between text-sm font-bold text-gray-600 mb-4">
-                  <span>Timeframe: {months} Months</span>
-                </div>
-                <input 
-                  type="range" 
-                  min="3" 
-                  max="24" 
-                  step="3"
-                  value={months}
-                  onChange={(e) => setMonths(parseInt(e.target.value))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
-                />
-                <div className="flex justify-between text-xs text-gray-400 mt-2">
-                  <span>3m</span>
-                  <span>12m</span>
-                  <span>24m</span>
-                </div>
+              <div className="flex bg-gray-100 rounded-lg p-1 mb-8">
+                <button 
+                  onClick={() => setView('before')}
+                  className={`flex-1 py-3 text-sm font-bold rounded-md transition-all ${view === 'before' ? 'bg-white text-slate-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                >
+                  The Status Quo
+                </button>
+                <button 
+                  onClick={() => setView('after')}
+                  className={`flex-1 py-3 text-sm font-bold rounded-md transition-all ${view === 'after' ? 'bg-orange-50 text-[#ff6b00] shadow-sm border border-orange-100' : 'text-gray-500 hover:text-gray-700'}`}
+                >
+                  With Ascension Agents
+                </button>
               </div>
 
-              <div className="space-y-4 mb-8">
-                <div className="p-4 rounded-xl border border-red-100 bg-red-50 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 h-full bg-red-100/50" style={{ width: `${Math.min((opsTotal / Math.max(opsTotal, systemTotal)) * 100, 100)}%` }} />
-                  <div className="relative z-10 flex justify-between items-center">
-                    <div>
-                      <h4 className="font-bold text-red-900">Full-Time Ops Hire</h4>
-                      <p className="text-xs text-red-800/80">Needs sleep, PTO, has bad weeks.</p>
+              <div className="relative min-h-[300px]">
+                {view === 'before' ? (
+                  <div className="space-y-4 animate-in fade-in slide-in-from-left-4 duration-500">
+                    <div className="p-4 rounded-xl border border-red-100 bg-red-50 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 h-full bg-red-100/50 w-full opacity-20" />
+                      <div className="relative z-10">
+                        <h4 className="font-bold text-red-900 mb-1">Human Bandwidth Logs</h4>
+                        <p className="text-sm text-red-800/80">Growth means hiring more people, adding more management layers, and increasing overhead.</p>
+                      </div>
                     </div>
-                    <span className="font-mono font-bold text-red-900">${opsTotal.toLocaleString()}</span>
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-xl border border-green-100 bg-green-50 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 h-full bg-green-100/50" style={{ width: `${Math.min((systemTotal / Math.max(opsTotal, systemTotal)) * 100, 100)}%` }} />
-                  <div className="relative z-10 flex justify-between items-center">
-                    <div>
-                      <h4 className="font-bold text-green-900">Agent System</h4>
-                      <p className="text-xs text-green-800/80">Runs 24/7, responds in seconds.</p>
+                    <div className="p-4 rounded-xl border border-gray-200 bg-gray-50">
+                      <h4 className="font-bold text-gray-900 mb-1">Inconsistent Execution</h4>
+                      <p className="text-sm text-gray-600">Tasks fall through the cracks. Quality depends on who is working and how much sleep they got.</p>
                     </div>
-                    <span className="font-mono font-bold text-green-900">${systemTotal.toLocaleString()}</span>
+                    <div className="p-4 rounded-xl border border-gray-200 bg-gray-50">
+                      <h4 className="font-bold text-gray-900 mb-1">Delayed Responses</h4>
+                      <p className="text-sm text-gray-600">"Let me check and get back to you." Leads wait hours or days for a response.</p>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              <div className="pt-6 border-t border-gray-100 text-center">
-                <p className="text-sm text-gray-500 mb-1">Projected Savings over {months} months</p>
-                <p className="text-3xl font-bold text-slate-900">${Math.max(0, savings).toLocaleString()}</p>
+                ) : (
+                  <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
+                    <div className="p-4 rounded-xl border border-green-100 bg-green-50 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 h-full bg-green-100/50 w-full opacity-20" />
+                      <div className="relative z-10">
+                        <h4 className="font-bold text-green-900 mb-1">Infinite Scalability</h4>
+                        <p className="text-sm text-green-800/80">Handle 10x the volume without adding headcount. Your digital workforce scales instantly.</p>
+                      </div>
+                    </div>
+                    <div className="p-4 rounded-xl border border-gray-200 bg-gray-50/80">
+                      <h4 className="font-bold text-gray-900 mb-1">Bulletproof Consistency</h4>
+                      <p className="text-sm text-gray-600">Every process is executed perfectly, every single time, exactly as instructed.</p>
+                    </div>
+                    <div className="p-4 rounded-xl border border-gray-200 bg-gray-50/80">
+                      <h4 className="font-bold text-gray-900 mb-1">24/7 Autonomy</h4>
+                      <p className="text-sm text-gray-600">Instant responses at 3 AM. Work is completed while you sleep.</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </FadeIn>
-          <FadeIn delay={0.3} className="flex justify-center lg:justify-start col-span-full mt-12">
+          <FadeIn delay={0.3} className="flex justify-center flex-col sm:flex-row gap-4 items-center justify-start lg:justify-start col-span-full mt-12 w-full">
             <DualCTA exploreLink="#timeline" />
           </FadeIn>
         </div>

@@ -10,7 +10,7 @@ import {
 import { submitToWebhook } from './lib/webhook';
 import { 
   WhoThisIsFor, Positioning, WhatYouGet, WhatThisDoes, 
-  WhyAscension, DoYouQualify, Investment, PictureThis, Contact,
+  WhyAscension, DoYouQualify, Transformation, PictureThis, Contact,
   DualCTA
 } from './Sections';
 import WebsitesPage from './WebsitesPage';
@@ -942,7 +942,7 @@ const HomePage = () => (
     <WhatThisDoes />
     <WhyAscension />
     <DoYouQualify />
-    <Investment />
+    <Transformation />
     <PictureThis />
     <Contact />
   </>
