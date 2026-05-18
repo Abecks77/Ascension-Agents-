@@ -64,11 +64,11 @@ const TermsOfServicePage = () => {
                 </li>
                 <li className="flex gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b00] mt-2.5 shrink-0"></div>
-                  <p><strong>Opt-Out:</strong> Reply STOP to any message to unsubscribe. You will receive one confirmation message and no further SMS communications will be sent. You may also opt out by emailing support@ascensionagents.xyz.</p>
+                  <p><strong>Opt-Out:</strong> Reply STOP to any message to unsubscribe. You will receive one confirmation message and no further SMS communications will be sent. You may also opt out by emailing ascensionagents@proton.me.</p>
                 </li>
                 <li className="flex gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b00] mt-2.5 shrink-0"></div>
-                  <p><strong>Help:</strong> Reply HELP to any message for assistance, or contact support@ascensionagents.xyz.</p>
+                  <p><strong>Help:</strong> Reply HELP to any message for assistance, or contact ascensionagents@proton.me.</p>
                 </li>
                 <li className="flex gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b00] mt-2.5 shrink-0"></div>
@@ -159,7 +159,7 @@ const TermsOfServicePage = () => {
                 <p className="font-bold text-slate-900 mb-2">Ascension Agents</p>
                 <div className="space-y-1 text-sm">
                   <p><strong>Website:</strong> ascensionagents.xyz</p>
-                  <p><strong>Email:</strong> support@ascensionagents.xyz</p>
+                  <p><strong>Email:</strong> ascensionagents@proton.me</p>
                 </div>
                 <p className="mt-4 text-sm bg-orange-50 text-orange-800 p-4 rounded-lg inline-block">For SMS opt-out requests, reply STOP to any message or email us with your phone number.</p>
               </div>

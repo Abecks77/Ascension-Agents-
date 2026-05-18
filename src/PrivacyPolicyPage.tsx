@@ -163,7 +163,7 @@ const PrivacyPolicyPage = () => {
                 </li>
                 <li className="flex gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b00] mt-2.5 shrink-0"></div>
-                  <p><strong>Opt-out:</strong> You may opt out at any time by replying STOP to any message. Upon opt-out, your number is added to our suppression list and will not receive further messages, except as required by law. Reply HELP for assistance or contact support@ascensionagents.xyz.</p>
+                  <p><strong>Opt-out:</strong> You may opt out at any time by replying STOP to any message. Upon opt-out, your number is added to our suppression list and will not receive further messages, except as required by law. Reply HELP for assistance or contact ascensionagents@proton.me.</p>
                 </li>
                 <li className="flex gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b00] mt-2.5 shrink-0"></div>
@@ -219,10 +219,10 @@ const PrivacyPolicyPage = () => {
                 </li>
                 <li className="flex gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b00] mt-2.5 shrink-0"></div>
-                  <p><strong>Do Not Sell:</strong> We do not sell personal information. California residents may still submit a Do Not Sell request under CCPA at support@ascensionagents.xyz</p>
+                  <p><strong>Do Not Sell:</strong> We do not sell personal information. California residents may still submit a Do Not Sell request under CCPA at ascensionagents@proton.me</p>
                 </li>
               </ul>
-              <p>To exercise any of these rights, contact us at support@ascensionagents.xyz. We will respond within 30 days.</p>
+              <p>To exercise any of these rights, contact us at ascensionagents@proton.me. We will respond within 30 days.</p>
             </section>
 
             <section>
@@ -255,7 +255,7 @@ const PrivacyPolicyPage = () => {
                 <p className="font-bold text-slate-900 mb-2">Ascension Agents</p>
                 <div className="space-y-1 text-sm mb-4">
                   <p><strong>Website:</strong> ascensionagents.xyz</p>
-                  <p><strong>Email:</strong> support@ascensionagents.xyz</p>
+                  <p><strong>Email:</strong> ascensionagents@proton.me</p>
                 </div>
                 <p className="text-sm bg-orange-50 text-orange-800 p-4 rounded-lg inline-block">For SMS opt-out requests, reply STOP to any message or email us your phone number and we will process your request within 1 business day.</p>
               </div>
