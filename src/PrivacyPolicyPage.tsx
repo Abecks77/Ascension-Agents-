@@ -9,6 +9,7 @@ const PrivacyPolicyPage = () => {
       <Helmet>
         <title>Privacy Policy | Ascension Agents</title>
         <meta name="description" content="Privacy Policy for Ascension Agents." />
+        <link rel="canonical" href="https://ascensionagents.xyz/privacy-policy" />
       </Helmet>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6">

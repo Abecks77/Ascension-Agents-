@@ -120,6 +120,7 @@ const FaqPage = () => {
       <Helmet>
         <title>FAQ | Ascension Agents</title>
         <meta name="description" content="Frequently Asked Questions about Ascension Agents. Learn how our AI systems can automate your business." />
+        <link rel="canonical" href="https://ascensionagents.xyz/faq" />
       </Helmet>
 
       {/* Decorative background elements */}

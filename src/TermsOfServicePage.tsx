@@ -9,6 +9,7 @@ const TermsOfServicePage = () => {
       <Helmet>
         <title>Terms of Service | Ascension Agents</title>
         <meta name="description" content="Terms of Service for Ascension Agents." />
+        <link rel="canonical" href="https://ascensionagents.xyz/terms-of-service" />
       </Helmet>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
