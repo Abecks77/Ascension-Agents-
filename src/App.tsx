@@ -16,6 +16,8 @@ import {
 import WebsitesPage from './WebsitesPage';
 import JournalPage from './JournalPage';
 import AppsPage from './AppsPage';
+import TermsOfServicePage from './TermsOfServicePage';
+import PrivacyPolicyPage from './PrivacyPolicyPage';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -902,8 +904,8 @@ const Footer = () => {
             <h4 className="font-bold mb-4 text-slate-900">Company</h4>
             <ul className="space-y-3 text-gray-500">
               <li><a href="#contact" className="hover:text-slate-900 transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-slate-900 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-slate-900 transition-colors">Terms of Service</a></li>
+              <li><Link to="/privacy-policy" className="hover:text-slate-900 transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms-of-service" className="hover:text-slate-900 transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
@@ -975,6 +977,8 @@ export default function App() {
               <Route path="/websites" element={<WebsitesPage />} />
               <Route path="/apps" element={<AppsPage />} />
               <Route path="/journal" element={<JournalPage />} />
+              <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             </Routes>
           </main>
           <Footer />
