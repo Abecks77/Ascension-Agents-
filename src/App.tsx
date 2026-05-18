@@ -18,6 +18,7 @@ import JournalPage from './JournalPage';
 import AppsPage from './AppsPage';
 import TermsOfServicePage from './TermsOfServicePage';
 import PrivacyPolicyPage from './PrivacyPolicyPage';
+import FaqPage from './FaqPage';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -896,7 +897,7 @@ const Footer = () => {
               <li><a href="#how-it-works" className="hover:text-slate-900 transition-colors">How it Works</a></li>
               <li><Link to="/websites" className="hover:text-slate-900 transition-colors">Website Employee's</Link></li>
               <li><Link to="/journal" className="hover:text-slate-900 transition-colors">Ascension Journal</Link></li>
-              <li><a href="#faq" className="hover:text-slate-900 transition-colors">FAQ</a></li>
+              <li><Link to="/faq" className="hover:text-slate-900 transition-colors">FAQ</Link></li>
             </ul>
           </div>
           
@@ -979,6 +980,7 @@ export default function App() {
               <Route path="/journal" element={<JournalPage />} />
               <Route path="/terms-of-service" element={<TermsOfServicePage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+              <Route path="/faq" element={<FaqPage />} />
             </Routes>
           </main>
           <Footer />
