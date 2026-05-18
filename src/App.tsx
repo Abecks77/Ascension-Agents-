@@ -300,9 +300,10 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "Website Employee's", href: "/websites" },
-    { label: "Workflow Tools", href: "/apps" },
+    { label: "Website Automation", href: "/websites" },
+    { label: "Business Applications", href: "/apps" },
     { label: "Ascension Journal", href: "/journal" },
+    { label: "FAQ", href: "/faq" },
   ];
 
   return (
@@ -895,7 +896,7 @@ const Footer = () => {
             <h4 className="font-bold mb-4 text-slate-900">Platform</h4>
             <ul className="space-y-3 text-gray-500">
               <li><a href="#how-it-works" className="hover:text-slate-900 transition-colors">How it Works</a></li>
-              <li><Link to="/websites" className="hover:text-slate-900 transition-colors">Website Employee's</Link></li>
+              <li><Link to="/websites" className="hover:text-slate-900 transition-colors">Website Automation</Link></li>
               <li><Link to="/journal" className="hover:text-slate-900 transition-colors">Ascension Journal</Link></li>
               <li><Link to="/faq" className="hover:text-slate-900 transition-colors">FAQ</Link></li>
             </ul>
